@@ -452,9 +452,9 @@ footer{background:var(--navy);padding:56px 52px 28px;}
     <div>
       <div class="stream-prev" id="twitchEmbed"></div>
       <div class="plats">
-        <a href="https://twitch.tv/jayvio_" target="_blank" class="plat ptw">
+        <a href="https://twitch.tv/jayvio" target="_blank" class="plat ptw">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
-          twitch.tv/jayvio_
+          twitch.tv/jayvio
         </a>
         <a href="https://youtube.com/@JayvioNYC" target="_blank" class="plat pyt">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
@@ -609,7 +609,7 @@ footer{background:var(--navy);padding:56px 52px 28px;}
       <li><a href="about.html">About</a></li>
     </ul></div>
     <div class="fcol"><h4>Stream</h4><ul>
-      <li><a href="https://twitch.tv/jayvio_" target="_blank">Twitch</a></li>
+      <li><a href="https://twitch.tv/jayvio" target="_blank">Twitch</a></li>
       <li><a href="https://youtube.com/@JayvioNYC" target="_blank">YouTube</a></li>
     </ul></div>
     <div class="fcol"><h4>More</h4><ul>
@@ -620,7 +620,7 @@ footer{background:var(--navy);padding:56px 52px 28px;}
   <div class="fbot">
     <div class="fcp">© 2025 City in Check · NYC Chess</div>
     <div class="socs">
-      <a href="https://twitch.tv/jayvio_" class="soc" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg></a>
+      <a href="https://twitch.tv/jayvio" class="soc" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg></a>
       <a href="https://youtube.com/@JayvioNYC" class="soc" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg></a>
       <a href="#" class="soc"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
     </div>
@@ -831,7 +831,7 @@ document.getElementById('regModal').addEventListener('click', e => {
   const el = document.getElementById('twitchEmbed');
   const parent = window.location.hostname || 'cityincheck.netlify.app';
   const iframe = document.createElement('iframe');
-  iframe.src = 'https://player.twitch.tv/?channel=jayvio_&parent=' + parent + '&autoplay=false';
+  iframe.src = 'https://player.twitch.tv/?channel=jayvio&parent=' + parent + '&autoplay=false';
   iframe.setAttribute('allowfullscreen', '');
   el.appendChild(iframe);
 })();
