@@ -642,11 +642,13 @@ footer{background:var(--navy);padding:56px 52px 28px;}
     <div style="font-size:22px;margin-bottom:8px;">♞</div>
     <div class="modal-title">Register</div>
     <div class="modal-event" id="regEventName"></div>
-    <form onsubmit="handleReg(event)" style="display:flex;flex-direction:column;gap:11px;">
-      <input class="ninput" type="text" placeholder="Full name" required>
-      <input class="ninput" type="email" placeholder="Email address" required>
-      <input class="ninput" type="text" placeholder="Chess.com / Lichess handle (optional)">
-      <select class="ninput" style="color:var(--ink-soft);">
+    <form name="event-registration" netlify onsubmit="handleReg(event)" style="display:flex;flex-direction:column;gap:11px;">
+      <input type="hidden" name="form-name" value="event-registration">
+      <input type="hidden" name="event" id="regEventNameInput">
+      <input class="ninput" type="text" name="name" placeholder="Full name" required>
+      <input class="ninput" type="email" name="email" placeholder="Email address" required>
+      <input class="ninput" type="text" name="chess-handle" placeholder="Chess.com / Lichess handle (optional)">
+      <select class="ninput" name="skill-level" style="color:var(--ink-soft);">
         <option value="">Skill level...</option>
         <option>Beginner (&lt;800)</option>
         <option>Intermediate (800–1400)</option>
@@ -658,6 +660,13 @@ footer{background:var(--navy);padding:56px 52px 28px;}
     <div id="regSuc" style="display:none;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--green);margin-top:12px;text-align:center;">✓ You're registered! See you on the board.</div>
   </div>
 </div>
+
+<!-- Netlify Forms detection for JS-submitted join form -->
+<form name="join-community" netlify hidden>
+  <input name="name"><input name="email"><input name="skill-level">
+  <input name="event-interests"><input name="boroughs">
+  <input name="chess-handle"><input name="lichess-handle"><input name="notifications">
+</form>
 
 <script>
 // HERO CAROUSEL — auto, no arrows
@@ -748,7 +757,40 @@ function toggleMulti(el) {
   el.classList.toggle('on');
 }
 
-function jSubmit() {
+async function jSubmit() {
+  const btn = document.querySelector('#jStep5 .join-next');
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+
+  const name = document.getElementById('jName').value.trim();
+  const email = document.getElementById('jEmail').value.trim();
+  const skillEl = document.querySelector('#jStep2 .join-opt.on');
+  const skillLevel = skillEl ? skillEl.textContent.trim() : 'Not specified';
+  const eventInterests = [...document.querySelectorAll('#jStep3 .join-opt.on')].map(o => o.textContent.trim()).join(', ') || 'None selected';
+  const boroughs = [...document.querySelectorAll('#jStep4 .join-opt.on')].map(o => o.textContent.trim()).join(', ') || 'None selected';
+  const chessHandle = document.getElementById('jChessHandle').value.trim() || 'N/A';
+  const lichess = document.getElementById('jLichess').value.trim() || 'N/A';
+  const notifications = [...document.querySelectorAll('#jStep5 .join-opt.on')].map(o => o.textContent.trim()).join(', ') || 'None';
+
+  try {
+    await fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        'form-name': 'join-community',
+        name, email,
+        'skill-level': skillLevel,
+        'event-interests': eventInterests,
+        boroughs,
+        'chess-handle': chessHandle,
+        'lichess-handle': lichess,
+        notifications
+      }).toString()
+    });
+  } catch (err) {
+    console.error('Join submission error:', err);
+  }
+
   document.getElementById('jStep5').classList.remove('active');
   document.getElementById('joinProg').style.width = '100%';
   document.getElementById('jSuccess').style.display = 'block';
@@ -761,12 +803,30 @@ document.getElementById('joinBg').addEventListener('click', e => {
 // MODAL
 function openReg(name) {
   document.getElementById('regEventName').textContent = name;
+  document.getElementById('regEventNameInput').value = name;
   document.getElementById('regModal').style.display = 'flex';
   document.getElementById('regSuc').style.display = 'none';
 }
 function closeReg() { document.getElementById('regModal').style.display = 'none'; }
-function handleReg(e) {
+async function handleReg(e) {
   e.preventDefault();
+  const form = e.target;
+  const submitBtn = form.querySelector('[type="submit"]');
+  submitBtn.textContent = 'Sending…';
+  submitBtn.disabled = true;
+
+  try {
+    await fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(new FormData(form)).toString()
+    });
+  } catch (err) {
+    console.error('Registration error:', err);
+  }
+
+  submitBtn.textContent = 'Confirm Registration';
+  submitBtn.disabled = false;
   document.getElementById('regSuc').style.display = 'block';
   setTimeout(closeReg, 2200);
 }
