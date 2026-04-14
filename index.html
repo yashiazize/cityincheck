@@ -126,12 +126,8 @@ nav.light .nav-links a{color:var(--ink-soft);}
 .stream-sec .sec-title{color:white;}
 .stream-sec .sec-desc{color:rgba(200,212,224,0.6);}
 .stream-body-text{font-size:14px;color:rgba(200,212,224,0.5);line-height:1.85;font-weight:300;margin:16px 0 28px;}
-.stream-prev{background:rgba(255,255,255,0.04);border-radius:10px;border:1px solid rgba(255,255,255,0.07);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;position:relative;overflow:hidden;}
-.stream-prev::before{content:'';position:absolute;inset:0;background:repeating-conic-gradient(rgba(255,255,255,0.018) 0% 25%,transparent 0% 50%);background-size:32px 32px;}
-.live-dot{width:9px;height:9px;background:#ff4444;border-radius:50%;animation:livep 1.5s ease-in-out infinite;position:relative;z-index:1;}
-@keyframes livep{0%,100%{box-shadow:0 0 0 0 rgba(255,68,68,.5)}50%{box-shadow:0 0 0 8px rgba(255,68,68,0)}}
-.stream-txt{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;color:rgba(200,212,224,0.4);text-transform:uppercase;position:relative;z-index:1;}
-.stream-ico{font-size:48px;position:relative;z-index:1;}
+.stream-prev{background:#000;border-radius:10px;border:1px solid rgba(255,255,255,0.07);aspect-ratio:16/9;position:relative;overflow:hidden;}
+.stream-prev iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
 .plats{display:flex;gap:10px;margin-top:16px;}
 .plat{display:flex;align-items:center;justify-content:center;gap:7px;flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);padding:10px 14px;border-radius:6px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;color:rgba(200,212,224,0.55);text-decoration:none;transition:all .2s;}
 .plat:hover{transform:translateY(-2px);}
@@ -454,11 +450,7 @@ footer{background:var(--navy);padding:56px 52px 28px;}
       <a href="#notify" class="btn btn-p">Get Live Alerts</a>
     </div>
     <div>
-      <div class="stream-prev">
-        <div class="live-dot"></div>
-        <div class="stream-ico">🎮</div>
-        <div class="stream-txt">Live when streaming</div>
-      </div>
+      <div class="stream-prev" id="twitchEmbed"></div>
       <div class="plats">
         <a href="https://twitch.tv/jayvio_" target="_blank" class="plat ptw">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
@@ -833,6 +825,16 @@ async function handleReg(e) {
 document.getElementById('regModal').addEventListener('click', e => {
   if (e.target === document.getElementById('regModal')) closeReg();
 });
+
+// TWITCH EMBED — inject iframe dynamically so parent= matches the actual hostname
+(function() {
+  const el = document.getElementById('twitchEmbed');
+  const parent = window.location.hostname || 'cityincheck.netlify.app';
+  const iframe = document.createElement('iframe');
+  iframe.src = 'https://player.twitch.tv/?channel=jayvio_&parent=' + parent + '&autoplay=false';
+  iframe.setAttribute('allowfullscreen', '');
+  el.appendChild(iframe);
+})();
 </script>
 </body>
 </html>
