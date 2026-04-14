@@ -88,7 +88,7 @@ nav.light .nav-links a{color:var(--ink-soft);}
 .filter-btn:hover{border-color:var(--accent);color:var(--accent);}
 .filter-btn.on{background:var(--accent);color:white;border-color:var(--accent);box-shadow:0 4px 14px var(--accent-glow);}
 .ev-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px;}
-.ec{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:all .3s;display:flex;flex-direction:column;box-shadow:0 2px 8px rgba(0,0,0,0.04);}
+.ec{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:all .3s;display:flex;flex-direction:column;box-shadow:0 2px 8px rgba(0,0,0,0.04);position:relative;}
 .ec:hover{transform:translateY(-5px);box-shadow:0 20px 48px rgba(0,0,0,0.1),0 0 0 1.5px var(--accent);}
 .ec[data-hidden="true"]{display:none;}
 .ec-bar{height:4px;}
@@ -168,46 +168,29 @@ footer{background:var(--navy);padding:56px 52px 28px;}
 
 
 /* JOIN MODAL */
-.join-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.48);z-index:999;align-items:center;justify-content:center;backdrop-filter:blur(8px);}
-.join-modal{background:var(--surface);border-radius:14px;max-width:520px;width:94%;position:relative;box-shadow:0 32px 80px rgba(0,0,0,0.18);overflow:hidden;}
-.join-modal-close{position:absolute;top:14px;right:16px;background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;line-height:1;z-index:2;}
-.join-modal-close:hover{color:var(--ink);}
+.join-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.52);z-index:999;align-items:center;justify-content:center;backdrop-filter:blur(10px);}
+.join-modal{background:var(--surface);border-radius:14px;max-width:640px;width:94%;position:relative;box-shadow:0 32px 80px rgba(0,0,0,0.22);overflow:hidden;padding-top:44px;}
+.join-modal-close{position:absolute;top:10px;right:12px;background:rgba(0,0,0,0.06);border:1px solid var(--border);color:var(--muted);font-size:16px;cursor:pointer;line-height:1;z-index:2;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.join-modal-close:hover{background:rgba(0,0,0,0.12);color:var(--ink);}
+.join-modal iframe{display:block;border:none;}
 
-/* progress bar */
-.join-progress{height:3px;background:var(--bg-alt);position:relative;}
-.join-progress-fill{height:100%;background:var(--accent);transition:width .4s ease;}
-
-/* steps */
-.join-step{display:none;padding:40px;}
-.join-step.active{display:block;}
-.join-step-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--accent);text-transform:uppercase;margin-bottom:10px;}
-.join-step-title{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:2px;color:var(--navy);line-height:1;margin-bottom:6px;}
-.join-step-sub{font-size:14px;color:var(--ink-soft);font-weight:300;margin-bottom:24px;line-height:1.6;}
-
-/* inputs */
-.join-input{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--ink);padding:13px 16px;font-family:'DM Sans',sans-serif;font-size:15px;border-radius:8px;outline:none;transition:all .2s;margin-bottom:12px;}
-.join-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow);}
-.join-input::placeholder{color:var(--muted);}
-
-/* pill option buttons */
-.join-options{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:20px;}
-.join-opt{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:9px 16px;border-radius:20px;border:1px solid var(--border);background:var(--surface);color:var(--ink-soft);cursor:pointer;transition:all .2s;user-select:none;}
-.join-opt:hover{border-color:var(--accent);color:var(--accent);}
-.join-opt.on{background:var(--accent);color:white;border-color:var(--accent);}
-
-/* nav buttons */
-.join-nav{display:flex;justify-content:space-between;align-items:center;margin-top:8px;}
-.join-back{background:none;border:none;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);cursor:pointer;text-transform:uppercase;transition:color .2s;padding:0;}
-.join-back:hover{color:var(--ink);}
-.join-next{background:var(--accent);color:white;border:none;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:12px 28px;border-radius:6px;cursor:pointer;transition:all .2s;}
-.join-next:hover{background:var(--accent-dk);transform:translateY(-1px);}
-.join-step-count{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--muted);}
-
-/* success state */
-.join-success{padding:48px 40px;text-align:center;}
-.join-success-icon{font-size:52px;margin-bottom:16px;}
-.join-success-title{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:2px;color:var(--navy);margin-bottom:8px;}
-.join-success-sub{font-size:15px;color:var(--ink-soft);font-weight:300;line-height:1.7;}
+/* ADMIN */
+.admin-trigger{position:fixed;bottom:22px;right:22px;z-index:600;background:var(--navy);color:rgba(200,212,224,0.7);border:1px solid rgba(255,255,255,0.08);padding:9px 18px;border-radius:8px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;cursor:pointer;display:none;transition:all .2s;}
+.admin-trigger.show{display:block;}
+.admin-trigger:hover{color:white;border-color:var(--accent);}
+.admin-panel{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:1000;align-items:flex-start;justify-content:center;backdrop-filter:blur(6px);padding:72px 20px 40px;overflow-y:auto;}
+.admin-panel.open{display:flex;}
+.admin-box{background:var(--surface);border-radius:14px;max-width:540px;width:100%;padding:36px;box-shadow:0 32px 80px rgba(0,0,0,0.22);}
+.admin-box-title{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:2px;color:var(--navy);}
+.admin-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:5px;display:block;}
+.admin-input,.admin-select{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--ink);padding:10px 14px;font-family:'DM Sans',sans-serif;font-size:14px;border-radius:8px;outline:none;transition:border-color .2s;margin-bottom:12px;}
+.admin-input:focus,.admin-select:focus{border-color:var(--accent);}
+.admin-input::placeholder{color:var(--muted);}
+.admin-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.admin-add-btn{width:100%;background:var(--navy);color:white;border:none;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:13px;border-radius:8px;cursor:pointer;margin-top:4px;transition:background .2s;}
+.admin-add-btn:hover{background:var(--navy-mid);}
+.admin-del-btn{position:absolute;top:9px;left:9px;background:rgba(220,38,38,0.88);color:white;border:none;border-radius:50%;width:22px;height:22px;font-size:12px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:5;transition:background .2s;}
+.admin-del-btn:hover{background:#dc2626;}
 
 /* MODAL */
 .modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:999;align-items:center;justify-content:center;backdrop-filter:blur(8px);}
@@ -247,15 +230,14 @@ footer{background:var(--navy);padding:56px 52px 28px;}
   <ul class="nav-links">
     <li><a href="index.html" class="active">Events</a></li>
     <li><a href="index.html#stream">Stream</a></li>
-    <li><a href="merch.html">Merch</a></li>
     <li><a href="about.html">About</a></li>
-    <li><a href="index.html#notify" class="nav-cta">Get Notified</a></li>
+    <li><a href="#" class="nav-cta" onclick="openJoin();return false;">Join Community</a></li>
   </ul>
 </nav>
 
 <!-- STATS BAR — fixed right under nav -->
 <div class="stats-bar">
-  <div class="stat-item"><div class="stat-n">500+</div><div class="stat-l">Members</div></div>
+  <div class="stat-item"><div class="stat-n" id="memberCount">500+</div><div class="stat-l">Members</div></div>
   <div class="stat-item"><div class="stat-n">24</div><div class="stat-l">Events This Year</div></div>
   <div class="stat-item"><div class="stat-n">5</div><div class="stat-l">NYC Boroughs</div></div>
   <div class="stat-item"><div class="stat-n">LIVE</div><div class="stat-l">Weekly Stream</div></div>
@@ -277,7 +259,7 @@ footer{background:var(--navy);padding:56px 52px 28px;}
       <p class="hero-sub">Where NYC's chess players compete, connect, and level up — from Washington Square to your screen.</p>
       <div class="hero-btns">
         <a href="#events" class="btn btn-p">View Upcoming Events</a>
-        <a href="#notify" class="btn btn-o">Get Notified</a>
+        <a href="#" class="btn btn-o" onclick="openJoin();return false;">Join Community</a>
       </div>
     </div>
   </div>
@@ -306,135 +288,7 @@ footer{background:var(--navy);padding:56px 52px 28px;}
       <button class="filter-btn" data-filter="workshop" onclick="filterEvents('workshop')">🎓 Workshop</button>
       <button class="filter-btn" data-filter="free" onclick="filterEvents('free')">✦ Free</button>
     </div>
-    <div class="ev-grid" id="evGrid">
-
-      <div class="ec" data-type="tournament">
-        <div class="ec-bar tournament"></div>
-        <div class="ec-head">
-          <div class="ec-date-block featured"><div class="ec-mo">Mar</div><div class="ec-dy">22</div></div>
-          <div class="ec-badges"><span class="badge badge-t">Tournament</span></div>
-        </div>
-        <div class="ec-body">
-          <div class="ec-type">Open Tournament</div>
-          <div class="ec-name">NYC Spring Classic</div>
-          <div class="ec-meta">
-            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Marshall Chess Club, Manhattan</div>
-            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>10:00 AM — All Day</div>
-            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>G/60 · All skill levels</div>
-          </div>
-          <div class="ec-footer">
-            <div class="ec-price"><strong>$15</strong>12 spots left</div>
-            <button class="btn-sm" onclick="openReg('NYC Spring Classic')">Register</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="ec" data-type="community free">
-        <div class="ec-bar free"></div>
-        <div class="ec-head">
-          <div class="ec-date-block"><div class="ec-mo">Mar</div><div class="ec-dy">29</div></div>
-          <div class="ec-badges"><span class="badge badge-c">Community</span><span class="badge badge-f">Free</span></div>
-        </div>
-        <div class="ec-body">
-          <div class="ec-type">Community Night</div>
-          <div class="ec-name">Blitz in the Park</div>
-          <div class="ec-meta">
-            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Washington Square Park</div>
-            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>2:00 PM — 6:00 PM</div>
-            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>5+0 Blitz · All welcome</div>
-          </div>
-          <div class="ec-footer">
-            <div class="ec-price"><span class="free-price">FREE</span>Open spots</div>
-            <button class="btn-sm" onclick="openReg('Blitz in the Park')">I'm In</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="ec" data-type="workshop">
-        <div class="ec-bar workshop"></div>
-        <div class="ec-head">
-          <div class="ec-date-block"><div class="ec-mo">Apr</div><div class="ec-dy">5</div></div>
-          <div class="ec-badges"><span class="badge badge-w">Workshop</span></div>
-        </div>
-        <div class="ec-body">
-          <div class="ec-type">Workshop</div>
-          <div class="ec-name">Endgame Masterclass</div>
-          <div class="ec-meta">
-            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Brooklyn Chess Academy</div>
-            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>1:00 PM — 3:30 PM</div>
-            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>Intermediate–Advanced</div>
-          </div>
-          <div class="ec-footer">
-            <div class="ec-price"><strong>$20</strong>8 spots left</div>
-            <button class="btn-sm" onclick="openReg('Endgame Masterclass')">Register</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="ec" data-type="tournament">
-        <div class="ec-bar tournament"></div>
-        <div class="ec-head">
-          <div class="ec-date-block"><div class="ec-mo">Apr</div><div class="ec-dy">19</div></div>
-          <div class="ec-badges"><span class="badge badge-t">Tournament</span></div>
-        </div>
-        <div class="ec-body">
-          <div class="ec-type">Rated Tournament</div>
-          <div class="ec-name">Bronx Borough Cup</div>
-          <div class="ec-meta">
-            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Bronx Community Center</div>
-            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>11:00 AM — All Day</div>
-            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>G/45 · USCF Rated</div>
-          </div>
-          <div class="ec-footer">
-            <div class="ec-price"><strong>$12</strong>Open reg</div>
-            <button class="btn-sm" onclick="openReg('Bronx Borough Cup')">Register</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="ec" data-type="community free">
-        <div class="ec-bar free"></div>
-        <div class="ec-head">
-          <div class="ec-date-block"><div class="ec-mo">May</div><div class="ec-dy">3</div></div>
-          <div class="ec-badges"><span class="badge badge-c">Community</span><span class="badge badge-f">Free</span></div>
-        </div>
-        <div class="ec-body">
-          <div class="ec-type">Community Night</div>
-          <div class="ec-name">Harlem Chess Social</div>
-          <div class="ec-meta">
-            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Harlem, Manhattan</div>
-            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>3:00 PM — 7:00 PM</div>
-            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>Casual · All levels</div>
-          </div>
-          <div class="ec-footer">
-            <div class="ec-price"><span class="free-price">FREE</span>Drop in</div>
-            <button class="btn-sm" onclick="openReg('Harlem Chess Social')">I'm In</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="ec" data-type="workshop">
-        <div class="ec-bar workshop"></div>
-        <div class="ec-head">
-          <div class="ec-date-block"><div class="ec-mo">May</div><div class="ec-dy">17</div></div>
-          <div class="ec-badges"><span class="badge badge-w">Workshop</span></div>
-        </div>
-        <div class="ec-body">
-          <div class="ec-type">Workshop</div>
-          <div class="ec-name">Attack & Defense Tactics</div>
-          <div class="ec-meta">
-            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Queens Library, Flushing</div>
-            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>12:00 PM — 2:30 PM</div>
-            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>Beginner–Intermediate</div>
-          </div>
-          <div class="ec-footer">
-            <div class="ec-price"><strong>$15</strong>12 spots</div>
-            <button class="btn-sm" onclick="openReg('Attack & Defense Tactics')">Register</button>
-          </div>
-        </div>
-      </div>
-
-    </div>
+    <div class="ev-grid" id="evGrid"></div>
     <div class="no-results" id="noResults">No events match this filter.</div>
   </div>
 </section>
@@ -447,7 +301,7 @@ footer{background:var(--navy);padding:56px 52px 28px;}
       <h2 class="sec-title">Watch the Stream</h2>
       <p class="sec-desc">Live analysis, blitz marathons, tournament coverage, and NYC chess — every week.</p>
       <p class="stream-body-text">From opening theory breakdowns to live game commentary — NYC chess on your screen, raw and real.</p>
-      <a href="#notify" class="btn btn-p">Get Live Alerts</a>
+      <a href="#" class="btn btn-p" onclick="openJoin();return false;">Join Community</a>
     </div>
     <div>
       <div class="stream-prev" id="twitchEmbed"></div>
@@ -480,118 +334,58 @@ footer{background:var(--navy);padding:56px 52px 28px;}
   </div>
 </section>
 
-<!-- JOIN MODAL -->
+<!-- JOIN MODAL — iframe lightbox -->
 <div class="join-bg" id="joinBg">
   <div class="join-modal">
     <button class="join-modal-close" onclick="closeJoin()">×</button>
+    <iframe src="https://craftlytest.requestwave.com/embed/form/city-in-check" width="100%" height="580" frameborder="0" allowtransparency="true"></iframe>
+  </div>
+</div>
 
-    <!-- PROGRESS BAR -->
-    <div class="join-progress">
-      <div class="join-progress-fill" id="joinProg" style="width:20%;"></div>
+<!-- ADMIN PANEL -->
+<button class="admin-trigger" id="adminTrigger" onclick="openAdmin()">⚙ Admin</button>
+<div class="admin-panel" id="adminPanel">
+  <div class="admin-box">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;">
+      <div class="admin-box-title">Event Manager</div>
+      <button onclick="closeAdmin()" style="background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);line-height:1;">×</button>
     </div>
-
-    <!-- STEP 1: Name + Email -->
-    <div class="join-step active" id="jStep1">
-      <div class="join-step-eyebrow">Step 1 of 5</div>
-      <div class="join-step-title">Who are you?</div>
-      <div class="join-step-sub">Let's start with the basics so we can stay in touch.</div>
-      <input class="join-input" type="text" id="jName" placeholder="Your first name" />
-      <input class="join-input" type="email" id="jEmail" placeholder="Email address" />
-      <div class="join-nav">
-        <div class="join-step-count">1 / 5</div>
-        <button class="join-next" onclick="jNext(1)">Continue →</button>
-      </div>
+    <label class="admin-label">Month</label>
+    <div class="admin-row" style="margin-bottom:0;">
+      <div><input class="admin-input" id="aMonth" placeholder="e.g. Apr"></div>
+      <div><input class="admin-input" id="aDay" placeholder="e.g. 22" type="number"></div>
     </div>
-
-    <!-- STEP 2: Skill level -->
-    <div class="join-step" id="jStep2">
-      <div class="join-step-eyebrow">Step 2 of 5</div>
-      <div class="join-step-title">How do you play?</div>
-      <div class="join-step-sub">Pick the one that best describes your game right now.</div>
-      <div class="join-options">
-        <div class="join-opt" onclick="toggleSingle(this, 'skill')">Just learning (&lt;600)</div>
-        <div class="join-opt" onclick="toggleSingle(this, 'skill')">Beginner (600–999)</div>
-        <div class="join-opt" onclick="toggleSingle(this, 'skill')">Intermediate (1000–1399)</div>
-        <div class="join-opt" onclick="toggleSingle(this, 'skill')">Club player (1400–1799)</div>
-        <div class="join-opt" onclick="toggleSingle(this, 'skill')">Advanced (1800+)</div>
-        <div class="join-opt" onclick="toggleSingle(this, 'skill')">I just watch 👀</div>
+    <label class="admin-label">Event Name</label>
+    <input class="admin-input" id="aName" placeholder="e.g. Queens Blitz Night">
+    <label class="admin-label">Event Type / Category</label>
+    <div class="admin-row" style="margin-bottom:0;">
+      <div>
+        <select class="admin-select" id="aType">
+          <option value="tournament">🏆 Tournament</option>
+          <option value="community free">♟ Community (Free)</option>
+          <option value="workshop">🎓 Workshop</option>
+          <option value="community">♟ Community (Paid)</option>
+        </select>
       </div>
-      <div class="join-nav">
-        <button class="join-back" onclick="jBack(2)">← Back</button>
-        <div class="join-step-count">2 / 5</div>
-        <button class="join-next" onclick="jNext(2)">Continue →</button>
-      </div>
+      <div><input class="admin-input" id="aSubtype" placeholder="e.g. Open Tournament"></div>
     </div>
-
-    <!-- STEP 3: Event types -->
-    <div class="join-step" id="jStep3">
-      <div class="join-step-eyebrow">Step 3 of 5</div>
-      <div class="join-step-title">What events interest you?</div>
-      <div class="join-step-sub">Select all that apply — we'll send you what's relevant.</div>
-      <div class="join-options">
-        <div class="join-opt" onclick="toggleMulti(this)">🏆 Rated Tournaments</div>
-        <div class="join-opt" onclick="toggleMulti(this)">♟ Casual Blitz Nights</div>
-        <div class="join-opt" onclick="toggleMulti(this)">🎓 Workshops & Lessons</div>
-        <div class="join-opt" onclick="toggleMulti(this)">🌳 Park Pop-ups</div>
-        <div class="join-opt" onclick="toggleMulti(this)">🍸 Bar Nights</div>
-        <div class="join-opt" onclick="toggleMulti(this)">📡 Online Events</div>
-        <div class="join-opt" onclick="toggleMulti(this)">🎥 Stream Watch Parties</div>
+    <label class="admin-label">Location</label>
+    <input class="admin-input" id="aLocation" placeholder="e.g. Washington Square Park">
+    <label class="admin-label">Time</label>
+    <input class="admin-input" id="aTime" placeholder="e.g. 2:00 PM — 6:00 PM">
+    <label class="admin-label">Format / Skill Level</label>
+    <input class="admin-input" id="aFormat" placeholder="e.g. All skill levels">
+    <div class="admin-row" style="margin-bottom:0;">
+      <div>
+        <label class="admin-label">Price (leave blank = Free)</label>
+        <input class="admin-input" id="aPrice" placeholder="e.g. $15">
       </div>
-      <div class="join-nav">
-        <button class="join-back" onclick="jBack(3)">← Back</button>
-        <div class="join-step-count">3 / 5</div>
-        <button class="join-next" onclick="jNext(3)">Continue →</button>
+      <div>
+        <label class="admin-label">Spots / Notes</label>
+        <input class="admin-input" id="aSpots" placeholder="e.g. 12 spots left">
       </div>
     </div>
-
-    <!-- STEP 4: Boroughs -->
-    <div class="join-step" id="jStep4">
-      <div class="join-step-eyebrow">Step 4 of 5</div>
-      <div class="join-step-title">Where in NYC?</div>
-      <div class="join-step-sub">Which boroughs work for you? We'll prioritize nearby events.</div>
-      <div class="join-options">
-        <div class="join-opt" onclick="toggleMulti(this)">Manhattan</div>
-        <div class="join-opt" onclick="toggleMulti(this)">Brooklyn</div>
-        <div class="join-opt" onclick="toggleMulti(this)">The Bronx</div>
-        <div class="join-opt" onclick="toggleMulti(this)">Queens</div>
-        <div class="join-opt" onclick="toggleMulti(this)">Staten Island</div>
-        <div class="join-opt" onclick="toggleMulti(this)">I'm outside NYC</div>
-        <div class="join-opt" onclick="toggleMulti(this)">Online only works for me</div>
-      </div>
-      <div class="join-nav">
-        <button class="join-back" onclick="jBack(4)">← Back</button>
-        <div class="join-step-count">4 / 5</div>
-        <button class="join-next" onclick="jNext(4)">Continue →</button>
-      </div>
-    </div>
-
-    <!-- STEP 5: Platforms -->
-    <div class="join-step" id="jStep5">
-      <div class="join-step-eyebrow">Step 5 of 5</div>
-      <div class="join-step-title">Anything else?</div>
-      <div class="join-step-sub">Where do you play online? Optional — helps us connect you.</div>
-      <input class="join-input" type="text" id="jChessHandle" placeholder="Chess.com username (optional)" />
-      <input class="join-input" type="text" id="jLichess" placeholder="Lichess username (optional)" />
-      <div class="join-options" style="margin-top:4px;">
-        <div class="join-opt" onclick="toggleMulti(this)">📬 Event alerts</div>
-        <div class="join-opt on" onclick="toggleMulti(this)">📡 Stream notifications</div>
-        <div class="join-opt" onclick="toggleMulti(this)">👕 Merch drops</div>
-      </div>
-      <div class="join-nav">
-        <button class="join-back" onclick="jBack(5)">← Back</button>
-        <div class="join-step-count">5 / 5</div>
-        <button class="join-next" onclick="jSubmit()" style="background:var(--navy);">Join ♞</button>
-      </div>
-    </div>
-
-    <!-- SUCCESS -->
-    <div class="join-success" id="jSuccess" style="display:none;">
-      <div class="join-success-icon">♞</div>
-      <div class="join-success-title">You're In!</div>
-      <p class="join-success-sub">Welcome to City in Check. We'll reach out about events that match your interests.<br><br>See you on the board.</p>
-      <button class="join-next" onclick="closeJoin()" style="margin-top:24px;width:100%;">Done</button>
-    </div>
-
+    <button class="admin-add-btn" onclick="addEvent()">+ Add Event</button>
   </div>
 </div>
 
@@ -605,7 +399,6 @@ footer{background:var(--navy);padding:56px 52px 28px;}
     <div class="fcol"><h4>Navigate</h4><ul>
       <li><a href="index.html">Events</a></li>
       <li><a href="index.html#stream">Stream</a></li>
-      <li><a href="merch.html">Merch</a></li>
       <li><a href="about.html">About</a></li>
     </ul></div>
     <div class="fcol"><h4>Stream</h4><ul>
@@ -614,7 +407,7 @@ footer{background:var(--navy);padding:56px 52px 28px;}
     </ul></div>
     <div class="fcol"><h4>More</h4><ul>
       <li><a href="merch.html">Merch (Soon)</a></li>
-      <li><a href="index.html#notify">Get Notified</a></li>
+      <li><a href="#" onclick="openJoin();return false;">Join Community</a></li>
     </ul></div>
   </div>
   <div class="fbot">
@@ -702,95 +495,135 @@ function filterEvents(type) {
 }
 
 // JOIN MODAL
-let jCurrent = 1;
-const jTotal = 5;
-
-function openJoin() {
-  jCurrent = 1;
-  document.querySelectorAll('.join-step').forEach(s => s.classList.remove('active'));
-  document.getElementById('jStep1').classList.add('active');
-  document.getElementById('jSuccess').style.display = 'none';
-  document.getElementById('joinProg').style.width = '20%';
-  document.getElementById('joinBg').style.display = 'flex';
-}
-
-function closeJoin() {
-  document.getElementById('joinBg').style.display = 'none';
-}
-
-function jNext(step) {
-  if (step === 1) {
-    const name = document.getElementById('jName').value.trim();
-    const email = document.getElementById('jEmail').value.trim();
-    if (!name) { document.getElementById('jName').focus(); document.getElementById('jName').style.borderColor = 'var(--accent)'; return; }
-    if (!email || !email.includes('@')) { document.getElementById('jEmail').focus(); document.getElementById('jEmail').style.borderColor = 'var(--accent)'; return; }
-  }
-  const next = step + 1;
-  document.getElementById('jStep' + step).classList.remove('active');
-  document.getElementById('jStep' + next).classList.add('active');
-  jCurrent = next;
-  document.getElementById('joinProg').style.width = (next / jTotal * 100) + '%';
-}
-
-function jBack(step) {
-  document.getElementById('jStep' + step).classList.remove('active');
-  const prev = step - 1;
-  document.getElementById('jStep' + prev).classList.add('active');
-  jCurrent = prev;
-  document.getElementById('joinProg').style.width = (prev / jTotal * 100) + '%';
-}
-
-function toggleSingle(el, group) {
-  el.closest('.join-options').querySelectorAll('.join-opt').forEach(o => o.classList.remove('on'));
-  el.classList.add('on');
-}
-
-function toggleMulti(el) {
-  el.classList.toggle('on');
-}
-
-async function jSubmit() {
-  const btn = document.querySelector('#jStep5 .join-next');
-  btn.textContent = 'Sending…';
-  btn.disabled = true;
-
-  const name = document.getElementById('jName').value.trim();
-  const email = document.getElementById('jEmail').value.trim();
-  const skillEl = document.querySelector('#jStep2 .join-opt.on');
-  const skillLevel = skillEl ? skillEl.textContent.trim() : 'Not specified';
-  const eventInterests = [...document.querySelectorAll('#jStep3 .join-opt.on')].map(o => o.textContent.trim()).join(', ') || 'None selected';
-  const boroughs = [...document.querySelectorAll('#jStep4 .join-opt.on')].map(o => o.textContent.trim()).join(', ') || 'None selected';
-  const chessHandle = document.getElementById('jChessHandle').value.trim() || 'N/A';
-  const lichess = document.getElementById('jLichess').value.trim() || 'N/A';
-  const notifications = [...document.querySelectorAll('#jStep5 .join-opt.on')].map(o => o.textContent.trim()).join(', ') || 'None';
-
-  try {
-    await fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({
-        'form-name': 'join-community',
-        name, email,
-        'skill-level': skillLevel,
-        'event-interests': eventInterests,
-        boroughs,
-        'chess-handle': chessHandle,
-        'lichess-handle': lichess,
-        notifications
-      }).toString()
-    });
-  } catch (err) {
-    console.error('Join submission error:', err);
-  }
-
-  document.getElementById('jStep5').classList.remove('active');
-  document.getElementById('joinProg').style.width = '100%';
-  document.getElementById('jSuccess').style.display = 'block';
-}
-
+function openJoin() { document.getElementById('joinBg').style.display = 'flex'; }
+function closeJoin() { document.getElementById('joinBg').style.display = 'none'; }
 document.getElementById('joinBg').addEventListener('click', e => {
   if (e.target === document.getElementById('joinBg')) closeJoin();
 });
+
+// MEMBER COUNTER — one increment per session, persisted in localStorage
+(function() {
+  if (!sessionStorage.getItem('cic_counted')) {
+    sessionStorage.setItem('cic_counted', '1');
+    const v = parseInt(localStorage.getItem('cic_views') || '0') + 1;
+    localStorage.setItem('cic_views', v);
+  }
+  const views = parseInt(localStorage.getItem('cic_views') || '0');
+  document.getElementById('memberCount').textContent = (500 + views) + '+';
+})();
+
+// EVENTS ENGINE
+const SVG_LOC = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>';
+const SVG_CLK = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
+const SVG_STR = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
+
+const TYPE_META = {
+  'tournament':      { bar:'tournament', badge:'Tournament',        cls:'badge-t', label:'Tournament'     },
+  'community free':  { bar:'free',       badge:'Community',         cls:'badge-c', badge2:'Free', cls2:'badge-f', label:'Community Night' },
+  'workshop':        { bar:'workshop',   badge:'Workshop',          cls:'badge-w', label:'Workshop'       },
+  'community':       { bar:'community',  badge:'Community',         cls:'badge-c', label:'Community Night'}
+};
+
+const DEFAULT_EVENTS = [
+  {id:1,type:'tournament',    mo:'Mar',dy:'22',name:'NYC Spring Classic',      subtype:'Open Tournament',      location:'Marshall Chess Club, Manhattan', time:'10:00 AM — All Day', format:'G/60 · All skill levels',   price:'$15', spots:'12 spots left', btn:'Register'},
+  {id:2,type:'community free',mo:'Mar',dy:'29',name:'Blitz in the Park',       subtype:'Community Night',       location:'Washington Square Park',         time:'2:00 PM — 6:00 PM',  format:'5+0 Blitz · All welcome',   price:null,  spots:'Open spots',    btn:"I'm In"},
+  {id:3,type:'workshop',      mo:'Apr',dy:'5', name:'Endgame Masterclass',     subtype:'Workshop',              location:'Brooklyn Chess Academy',         time:'1:00 PM — 3:30 PM',  format:'Intermediate–Advanced',      price:'$20', spots:'8 spots left',  btn:'Register'},
+  {id:4,type:'tournament',    mo:'Apr',dy:'19',name:'Bronx Borough Cup',       subtype:'Rated Tournament',      location:'Bronx Community Center',         time:'11:00 AM — All Day', format:'G/45 · USCF Rated',          price:'$12', spots:'Open reg',      btn:'Register'},
+  {id:5,type:'community free',mo:'May',dy:'3', name:'Harlem Chess Social',     subtype:'Community Night',       location:'Harlem, Manhattan',              time:'3:00 PM — 7:00 PM',  format:'Casual · All levels',        price:null,  spots:'Drop in',       btn:"I'm In"},
+  {id:6,type:'workshop',      mo:'May',dy:'17',name:'Attack & Defense Tactics',subtype:'Workshop',              location:'Queens Library, Flushing',       time:'12:00 PM — 2:30 PM', format:'Beginner–Intermediate',      price:'$15', spots:'12 spots',      btn:'Register'},
+];
+
+function loadEvents() {
+  try { return JSON.parse(localStorage.getItem('cic_events')) || DEFAULT_EVENTS; }
+  catch(e) { return DEFAULT_EVENTS; }
+}
+function saveEvents(evs) { localStorage.setItem('cic_events', JSON.stringify(evs)); }
+
+function renderEvents(evs) {
+  const isAdmin = new URLSearchParams(location.search).has('admin');
+  const grid = document.getElementById('evGrid');
+  if (!evs.length) { grid.innerHTML = ''; document.getElementById('noResults').style.display = 'block'; return; }
+  document.getElementById('noResults').style.display = 'none';
+  grid.innerHTML = evs.map((ev, i) => {
+    const m = TYPE_META[ev.type] || TYPE_META['community'];
+    const b2 = m.badge2 ? `<span class="badge ${m.cls2}">${m.badge2}</span>` : '';
+    const priceHtml = ev.price
+      ? `<strong>${ev.price}</strong>${ev.spots}`
+      : `<span class="free-price">FREE</span>${ev.spots}`;
+    const delBtn = isAdmin ? `<button class="admin-del-btn" onclick="deleteEvent(${ev.id})" title="Remove">×</button>` : '';
+    const featDate = i === 0 ? ' featured' : '';
+    const safeN = ev.name.replace(/'/g, "\\'");
+    return `<div class="ec" data-type="${ev.type}" data-id="${ev.id}">
+      ${delBtn}
+      <div class="ec-bar ${m.bar}"></div>
+      <div class="ec-head">
+        <div class="ec-date-block${featDate}"><div class="ec-mo">${ev.mo}</div><div class="ec-dy">${ev.dy}</div></div>
+        <div class="ec-badges"><span class="badge ${m.cls}">${m.badge}</span>${b2}</div>
+      </div>
+      <div class="ec-body">
+        <div class="ec-type">${ev.subtype || m.label}</div>
+        <div class="ec-name">${ev.name}</div>
+        <div class="ec-meta">
+          <div class="ec-row">${SVG_LOC}${ev.location}</div>
+          <div class="ec-row">${SVG_CLK}${ev.time}</div>
+          <div class="ec-row">${SVG_STR}${ev.format}</div>
+        </div>
+        <div class="ec-footer">
+          <div class="ec-price">${priceHtml}</div>
+          <button class="btn-sm" onclick="openReg('${safeN}')">${ev.btn}</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  // re-apply active filter
+  const activeFilter = document.querySelector('.filter-btn.on');
+  if (activeFilter && activeFilter.dataset.filter !== 'all') filterEvents(activeFilter.dataset.filter);
+}
+
+function deleteEvent(id) {
+  if (!confirm('Remove this event?')) return;
+  const evs = loadEvents().filter(e => e.id !== id);
+  saveEvents(evs);
+  renderEvents(evs);
+}
+
+function addEvent() {
+  const mo = document.getElementById('aMonth').value.trim();
+  const dy = document.getElementById('aDay').value.trim();
+  const name = document.getElementById('aName').value.trim();
+  const type = document.getElementById('aType').value;
+  const subtype = document.getElementById('aSubtype').value.trim();
+  const location = document.getElementById('aLocation').value.trim();
+  const time = document.getElementById('aTime').value.trim();
+  const format = document.getElementById('aFormat').value.trim();
+  const price = document.getElementById('aPrice').value.trim() || null;
+  const spots = document.getElementById('aSpots').value.trim();
+  if (!mo || !dy || !name || !location || !time) { alert('Please fill in month, day, name, location, and time.'); return; }
+  const evs = loadEvents();
+  const id = Date.now();
+  evs.push({ id, type, mo, dy, name,
+    subtype: subtype || TYPE_META[type]?.label || '',
+    location, time, format, price, spots,
+    btn: type.includes('free') || !price ? "I'm In" : 'Register'
+  });
+  saveEvents(evs);
+  renderEvents(evs);
+  ['aMonth','aDay','aName','aSubtype','aLocation','aTime','aFormat','aPrice','aSpots'].forEach(id => { document.getElementById(id).value = ''; });
+  closeAdmin();
+}
+
+// ADMIN PANEL
+const isAdminMode = new URLSearchParams(location.search).has('admin');
+if (isAdminMode) document.getElementById('adminTrigger').classList.add('show');
+
+function openAdmin() { document.getElementById('adminPanel').classList.add('open'); }
+function closeAdmin() { document.getElementById('adminPanel').classList.remove('open'); }
+document.getElementById('adminPanel').addEventListener('click', e => {
+  if (e.target === document.getElementById('adminPanel')) closeAdmin();
+});
+
+// INIT — render events on load
+renderEvents(loadEvents());
 
 // MODAL
 function openReg(name) {
