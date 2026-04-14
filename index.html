@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>City in Check — NYC Chess Community</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#f4f2ee; --bg-alt:#eceae5; --surface:#ffffff;
+  --navy:#0d1b2e; --navy-mid:#1e3358;
+  --ink:#1a1a1a; --ink-soft:#4a4a52; --muted:#8e8e99;
+  --border:rgba(0,0,0,0.08); --border-dark:rgba(255,255,255,0.1);
+  --accent:#5b9fd4; --accent-dk:#3d7fb8; --accent-glow:rgba(91,159,212,0.25);
+  --gold:#c9a84c; --green:#3daa6e; --purple:#8b6fcb;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif;overflow-x:hidden;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes kenBurns{0%{transform:scale(1)}100%{transform:scale(1.06)}}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:14px 52px;background:rgba(13,27,46,0.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.07);transition:all .3s;}
+nav.light{background:rgba(244,242,238,0.94);border-bottom:1px solid var(--border);}
+.nav-logo{display:flex;align-items:center;gap:11px;text-decoration:none;}
+.nav-icon{width:38px;height:38px;border-radius:50%;border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:18px;background:var(--navy-mid);color:white;}
+.nav-name{font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:2px;color:#f5f8fc;line-height:1;transition:color .3s;}
+nav.light .nav-name{color:var(--navy);}
+.nav-sub{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:3px;color:var(--accent);text-transform:uppercase;}
+.nav-links{display:flex;gap:30px;list-style:none;align-items:center;}
+.nav-links a{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(200,212,224,0.75);text-decoration:none;transition:color .2s;}
+nav.light .nav-links a{color:var(--ink-soft);}
+.nav-links a:hover,.nav-links a.active{color:var(--accent);}
+.nav-cta{background:var(--accent)!important;color:white!important;padding:7px 18px;border-radius:4px;font-size:10px!important;}
+
+/* STATS BAR — fixed right under nav */
+.stats-bar{position:fixed;top:67px;left:0;right:0;z-index:190;background:var(--navy);display:flex;justify-content:center;align-items:stretch;border-bottom:2px solid rgba(91,159,212,0.2);}
+.stat-item{display:flex;align-items:center;gap:10px;padding:9px 28px;border-right:1px solid rgba(255,255,255,0.06);}
+.stat-item:last-child{border-right:none;}
+.stat-n{font-family:'Bebas Neue',sans-serif;font-size:21px;color:var(--accent);letter-spacing:2px;line-height:1;}
+.stat-l{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:rgba(200,212,224,0.42);text-transform:uppercase;}
+
+/* HERO */
+#hero{position:relative;height:100vh;min-height:560px;overflow:hidden;}
+.hero-slides{position:absolute;inset:0;}
+.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.4s ease;}
+.hero-slide.active{opacity:1;}
+.hero-slide-bg{position:absolute;inset:0;background-size:cover;background-position:center;animation:kenBurns 8s ease-out forwards;}
+.slide-1 .hero-slide-bg{background:linear-gradient(135deg,#0b1520 0%,#0d2137 35%,#163352 70%,#1e3f6a 100%);}
+.slide-2 .hero-slide-bg{background:linear-gradient(160deg,#160c22 0%,#1f1035 40%,#0d2137 80%,#153050 100%);}
+.slide-3 .hero-slide-bg{background:linear-gradient(140deg,#0a1a0f 0%,#0d2820 50%,#0d1b2e 100%);}
+.slide-4 .hero-slide-bg{background:linear-gradient(150deg,#1a100a 0%,#2a1a0e 40%,#1e2a3a 80%,#0d1b2e 100%);}
+.hero-slide::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(5,10,20,0.9) 0%,rgba(5,10,20,0.4) 55%,rgba(5,10,20,0.15) 100%);}
+.slide-piece{position:absolute;right:6%;top:50%;transform:translateY(-50%);font-size:340px;opacity:0.055;color:white;pointer-events:none;z-index:1;line-height:1;}
+.hero-content{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:0 64px 80px;}
+.hero-inner{max-width:760px;}
+.hero-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:4px;color:var(--accent);text-transform:uppercase;margin-bottom:16px;animation:fadeUp .8s ease both;}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,9vw,106px);letter-spacing:4px;line-height:.92;color:#fff;animation:fadeUp .8s .1s ease both;}
+.hero-title em{color:var(--accent);font-style:normal;}
+.hero-sub{font-size:17px;color:rgba(255,255,255,0.68);margin-top:18px;max-width:500px;line-height:1.7;font-weight:300;animation:fadeUp .8s .2s ease both;}
+.hero-btns{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap;animation:fadeUp .8s .3s ease both;}
+.hero-dots{position:absolute;bottom:36px;right:64px;z-index:3;display:flex;gap:7px;align-items:center;}
+.hdot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.28);border:none;cursor:pointer;padding:0;transition:all .4s;}
+.hdot.on{background:var(--accent);width:22px;border-radius:3px;}
+
+
+/* BUTTONS */
+.btn{display:inline-block;text-decoration:none;cursor:pointer;border:none;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;border-radius:4px;transition:all .22s;}
+.btn-p{background:var(--accent);color:white;padding:13px 28px;}
+.btn-p:hover{background:var(--accent-dk);transform:translateY(-2px);box-shadow:0 8px 24px var(--accent-glow);}
+.btn-o{background:rgba(255,255,255,0.1);color:white;padding:13px 28px;border:1px solid rgba(255,255,255,0.3);backdrop-filter:blur(4px);}
+.btn-o:hover{background:rgba(255,255,255,0.2);transform:translateY(-2px);}
+.btn-sm{background:var(--accent);color:white;padding:7px 15px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;border:none;border-radius:4px;cursor:pointer;transition:all .2s;}
+.btn-sm:hover{background:var(--accent-dk);}
+
+/* EVENTS */
+.events-sec{background:var(--bg);padding:80px 52px;}
+#events{scroll-margin-top:114px;}
+.events-sec-inner{max-width:1200px;margin:0 auto;}
+.sec-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:4px;color:var(--accent);text-transform:uppercase;margin-bottom:8px;}
+.sec-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,54px);letter-spacing:3px;color:var(--navy);line-height:1;margin-bottom:6px;}
+.sec-desc{font-size:15px;color:var(--ink-soft);line-height:1.8;font-weight:300;max-width:520px;}
+.events-top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:24px;flex-wrap:wrap;gap:16px;}
+.filter-bar{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:28px;}
+.filter-btn{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:8px 18px;border-radius:20px;border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;transition:all .2s;}
+.filter-btn:hover{border-color:var(--accent);color:var(--accent);}
+.filter-btn.on{background:var(--accent);color:white;border-color:var(--accent);box-shadow:0 4px 14px var(--accent-glow);}
+.ev-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px;}
+.ec{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:all .3s;display:flex;flex-direction:column;box-shadow:0 2px 8px rgba(0,0,0,0.04);}
+.ec:hover{transform:translateY(-5px);box-shadow:0 20px 48px rgba(0,0,0,0.1),0 0 0 1.5px var(--accent);}
+.ec[data-hidden="true"]{display:none;}
+.ec-bar{height:4px;}
+.ec-bar.tournament{background:linear-gradient(90deg,var(--gold),#e8c96a);}
+.ec-bar.community{background:linear-gradient(90deg,var(--green),#5dcc8e);}
+.ec-bar.workshop{background:linear-gradient(90deg,var(--accent),#7ab8e0);}
+.ec-bar.free{background:linear-gradient(90deg,var(--green),#5dcc8e);}
+.ec-head{padding:16px 18px 12px;display:flex;justify-content:space-between;align-items:flex-start;}
+.ec-date-block{background:var(--navy);border-radius:6px;padding:8px 12px;text-align:center;min-width:50px;flex-shrink:0;}
+.ec-date-block.featured{background:var(--accent);}
+.ec-mo{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.5);}
+.ec-dy{font-family:'Bebas Neue',sans-serif;font-size:28px;color:white;line-height:1;}
+.ec-badges{display:flex;flex-direction:column;align-items:flex-end;gap:4px;}
+.badge{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;border-radius:10px;}
+.badge-t{background:rgba(201,168,76,.1);color:#a07828;border:1px solid rgba(201,168,76,.22);}
+.badge-f{background:rgba(61,170,110,.1);color:#2a8a52;border:1px solid rgba(61,170,110,.22);}
+.badge-w{background:rgba(91,159,212,.1);color:var(--accent-dk);border:1px solid rgba(91,159,212,.22);}
+.badge-c{background:rgba(139,111,203,.1);color:var(--purple);border:1px solid rgba(139,111,203,.22);}
+.ec-body{padding:2px 18px 18px;flex:1;display:flex;flex-direction:column;}
+.ec-type{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;margin-bottom:4px;}
+.ec-name{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:1px;color:var(--navy);line-height:1.05;margin-bottom:12px;}
+.ec-meta{display:flex;flex-direction:column;gap:5px;margin-bottom:auto;}
+.ec-row{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink-soft);font-weight:300;}
+.ec-row svg{opacity:.35;flex-shrink:0;}
+.ec-footer{display:flex;justify-content:space-between;align-items:center;padding-top:14px;margin-top:14px;border-top:1px solid var(--border);}
+.ec-price{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--muted);}
+.ec-price strong{color:var(--navy);font-size:15px;display:block;font-family:'Bebas Neue',sans-serif;letter-spacing:1px;}
+.ec-price .free-price{color:var(--green);font-size:15px;display:block;font-family:'Bebas Neue',sans-serif;letter-spacing:1px;}
+.no-results{text-align:center;padding:60px 20px;color:var(--muted);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;display:none;}
+
+/* STREAM — dark */
+.stream-sec{background:var(--navy);padding:96px 52px;position:relative;overflow:hidden;}
+.stream-sec::before{content:'♞';position:absolute;right:-20px;top:50%;transform:translateY(-50%);font-size:440px;opacity:0.025;color:white;pointer-events:none;line-height:1;}
+.stream-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.stream-sec .sec-title{color:white;}
+.stream-sec .sec-desc{color:rgba(200,212,224,0.6);}
+.stream-body-text{font-size:14px;color:rgba(200,212,224,0.5);line-height:1.85;font-weight:300;margin:16px 0 28px;}
+.stream-prev{background:rgba(255,255,255,0.04);border-radius:10px;border:1px solid rgba(255,255,255,0.07);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;position:relative;overflow:hidden;}
+.stream-prev::before{content:'';position:absolute;inset:0;background:repeating-conic-gradient(rgba(255,255,255,0.018) 0% 25%,transparent 0% 50%);background-size:32px 32px;}
+.live-dot{width:9px;height:9px;background:#ff4444;border-radius:50%;animation:livep 1.5s ease-in-out infinite;position:relative;z-index:1;}
+@keyframes livep{0%,100%{box-shadow:0 0 0 0 rgba(255,68,68,.5)}50%{box-shadow:0 0 0 8px rgba(255,68,68,0)}}
+.stream-txt{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;color:rgba(200,212,224,0.4);text-transform:uppercase;position:relative;z-index:1;}
+.stream-ico{font-size:48px;position:relative;z-index:1;}
+.plats{display:flex;gap:10px;margin-top:16px;}
+.plat{display:flex;align-items:center;justify-content:center;gap:7px;flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);padding:10px 14px;border-radius:6px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;color:rgba(200,212,224,0.55);text-decoration:none;transition:all .2s;}
+.plat:hover{transform:translateY(-2px);}
+.ptw:hover{border-color:#9147ff;color:#9147ff;background:rgba(145,71,255,0.06);}
+.pyt:hover{border-color:#ff0000;color:#ff0000;background:rgba(255,0,0,0.06);}
+
+/* NOTIFY — warm */
+.notify-sec{background:var(--bg-alt);padding:96px 52px;border-top:1px solid var(--border);}
+.notify-inner{max-width:540px;margin:0 auto;text-align:center;}
+.notify-sec .sec-title{color:var(--navy);}
+.nbox{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:40px;margin-top:28px;box-shadow:0 4px 24px rgba(0,0,0,0.05);}
+.nbox-title{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;color:var(--navy);margin-bottom:4px;}
+.nbox-sub{font-size:13px;color:var(--ink-soft);font-weight:300;}
+.nform{display:flex;gap:9px;margin-top:18px;flex-wrap:wrap;}
+.ninput{flex:1;min-width:170px;background:var(--bg);border:1px solid var(--border);color:var(--ink);padding:12px 15px;font-family:'DM Sans',sans-serif;font-size:14px;border-radius:6px;outline:none;transition:all .2s;}
+.ninput:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow);}
+.ninput::placeholder{color:var(--muted);}
+.nchecks{display:flex;gap:16px;margin-top:12px;flex-wrap:wrap;justify-content:center;}
+.nchecks label{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-soft);cursor:pointer;}
+.nnote{font-size:11px;color:var(--muted);margin-top:12px;font-family:'DM Mono',monospace;letter-spacing:1px;}
+.sucmsg{display:none;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--green);margin-top:12px;}
+
+/* FOOTER */
+footer{background:var(--navy);padding:56px 52px 28px;}
+.ftop{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:44px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.fbn{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:3px;color:white;}
+.fbs{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:3px;color:var(--accent);text-transform:uppercase;margin-bottom:10px;}
+.fbd{font-size:13px;color:rgba(200,212,224,0.4);line-height:1.8;font-weight:300;max-width:230px;}
+.fcol h4{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:rgba(200,212,224,0.3);margin-bottom:14px;}
+.fcol ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.fcol ul a{font-size:13px;color:rgba(200,212,224,0.5);text-decoration:none;font-weight:300;transition:color .2s;}
+.fcol ul a:hover{color:white;}
+.fbot{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding-top:20px;flex-wrap:wrap;gap:12px;}
+.fcp{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:rgba(200,212,224,0.2);text-transform:uppercase;}
+.socs{display:flex;gap:10px;}
+.soc{width:30px;height:30px;border:1px solid rgba(255,255,255,0.09);border-radius:4px;display:flex;align-items:center;justify-content:center;color:rgba(200,212,224,0.45);text-decoration:none;transition:all .2s;}
+.soc:hover{border-color:var(--accent);color:var(--accent);}
+
+
+/* JOIN MODAL */
+.join-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.48);z-index:999;align-items:center;justify-content:center;backdrop-filter:blur(8px);}
+.join-modal{background:var(--surface);border-radius:14px;max-width:520px;width:94%;position:relative;box-shadow:0 32px 80px rgba(0,0,0,0.18);overflow:hidden;}
+.join-modal-close{position:absolute;top:14px;right:16px;background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;line-height:1;z-index:2;}
+.join-modal-close:hover{color:var(--ink);}
+
+/* progress bar */
+.join-progress{height:3px;background:var(--bg-alt);position:relative;}
+.join-progress-fill{height:100%;background:var(--accent);transition:width .4s ease;}
+
+/* steps */
+.join-step{display:none;padding:40px;}
+.join-step.active{display:block;}
+.join-step-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--accent);text-transform:uppercase;margin-bottom:10px;}
+.join-step-title{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:2px;color:var(--navy);line-height:1;margin-bottom:6px;}
+.join-step-sub{font-size:14px;color:var(--ink-soft);font-weight:300;margin-bottom:24px;line-height:1.6;}
+
+/* inputs */
+.join-input{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--ink);padding:13px 16px;font-family:'DM Sans',sans-serif;font-size:15px;border-radius:8px;outline:none;transition:all .2s;margin-bottom:12px;}
+.join-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow);}
+.join-input::placeholder{color:var(--muted);}
+
+/* pill option buttons */
+.join-options{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:20px;}
+.join-opt{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:9px 16px;border-radius:20px;border:1px solid var(--border);background:var(--surface);color:var(--ink-soft);cursor:pointer;transition:all .2s;user-select:none;}
+.join-opt:hover{border-color:var(--accent);color:var(--accent);}
+.join-opt.on{background:var(--accent);color:white;border-color:var(--accent);}
+
+/* nav buttons */
+.join-nav{display:flex;justify-content:space-between;align-items:center;margin-top:8px;}
+.join-back{background:none;border:none;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);cursor:pointer;text-transform:uppercase;transition:color .2s;padding:0;}
+.join-back:hover{color:var(--ink);}
+.join-next{background:var(--accent);color:white;border:none;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:12px 28px;border-radius:6px;cursor:pointer;transition:all .2s;}
+.join-next:hover{background:var(--accent-dk);transform:translateY(-1px);}
+.join-step-count{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--muted);}
+
+/* success state */
+.join-success{padding:48px 40px;text-align:center;}
+.join-success-icon{font-size:52px;margin-bottom:16px;}
+.join-success-title{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:2px;color:var(--navy);margin-bottom:8px;}
+.join-success-sub{font-size:15px;color:var(--ink-soft);font-weight:300;line-height:1.7;}
+
+/* MODAL */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:999;align-items:center;justify-content:center;backdrop-filter:blur(8px);}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:40px;max-width:420px;width:90%;position:relative;box-shadow:0 32px 80px rgba(0,0,0,0.18);}
+.modal-close{position:absolute;top:14px;right:16px;background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;line-height:1;}
+.modal-close:hover{color:var(--ink);}
+.modal-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:var(--navy);margin-bottom:4px;}
+.modal-event{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);margin-bottom:18px;}
+
+@media(max-width:768px){
+  nav{padding:12px 18px;}
+  .nav-links{display:none;}
+  .stats-bar{top:60px;overflow-x:auto;}
+  .stat-item{padding:8px 16px;flex-shrink:0;}
+  .hero-content{padding:0 22px 56px;}
+  .hero-dots{right:22px;bottom:28px;}
+  .events-sec{padding:64px 18px;}
+  .stream-sec{padding:64px 18px;}
+  .stream-inner{grid-template-columns:1fr;gap:36px;}
+  .notify-sec{padding:64px 18px;}
+  .nbox{padding:26px 18px;}
+  .ftop{grid-template-columns:1fr 1fr;gap:28px;}
+  footer{padding:44px 18px 22px;}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo">
+    <div class="nav-icon">♞</div>
+    <div>
+      <div class="nav-name">City in Check</div>
+      <div class="nav-sub">NYC Chess</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Events</a></li>
+    <li><a href="index.html#stream">Stream</a></li>
+    <li><a href="merch.html">Merch</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="index.html#notify" class="nav-cta">Get Notified</a></li>
+  </ul>
+</nav>
+
+<!-- STATS BAR — fixed right under nav -->
+<div class="stats-bar">
+  <div class="stat-item"><div class="stat-n">500+</div><div class="stat-l">Members</div></div>
+  <div class="stat-item"><div class="stat-n">24</div><div class="stat-l">Events This Year</div></div>
+  <div class="stat-item"><div class="stat-n">5</div><div class="stat-l">NYC Boroughs</div></div>
+  <div class="stat-item"><div class="stat-n">LIVE</div><div class="stat-l">Weekly Stream</div></div>
+  <div class="stat-item"><div class="stat-n">2</div><div class="stat-l">Venues</div></div>
+</div>
+
+<!-- HERO — full-bleed photo carousel, auto, no arrows -->
+<section id="hero">
+  <div class="hero-slides">
+    <div class="hero-slide slide-1 active"><div class="hero-slide-bg"></div><div class="slide-piece">♞</div></div>
+    <div class="hero-slide slide-2"><div class="hero-slide-bg"></div><div class="slide-piece">♟</div></div>
+    <div class="hero-slide slide-3"><div class="hero-slide-bg"></div><div class="slide-piece">♜</div></div>
+    <div class="hero-slide slide-4"><div class="hero-slide-bg"></div><div class="slide-piece">♛</div></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">♟ New York City Chess Community</div>
+      <h1 class="hero-title">City<br><em>in Check</em></h1>
+      <p class="hero-sub">Where NYC's chess players compete, connect, and level up — from Washington Square to your screen.</p>
+      <div class="hero-btns">
+        <a href="#events" class="btn btn-p">View Upcoming Events</a>
+        <a href="#notify" class="btn btn-o">Get Notified</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-dots">
+    <button class="hdot on" onclick="heroGo(0)"></button>
+    <button class="hdot" onclick="heroGo(1)"></button>
+    <button class="hdot" onclick="heroGo(2)"></button>
+    <button class="hdot" onclick="heroGo(3)"></button>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section class="events-sec" id="events">
+  <div class="events-sec-inner">
+    <div class="events-top">
+      <div>
+        <div class="sec-eyebrow">♟ On The Board</div>
+        <h2 class="sec-title">Upcoming Events</h2>
+        <p class="sec-desc">From casual blitz nights to rated tournaments — there's always a game in this city.</p>
+      </div>
+    </div>
+    <div class="filter-bar">
+      <button class="filter-btn on" data-filter="all" onclick="filterEvents('all')">All Events</button>
+      <button class="filter-btn" data-filter="tournament" onclick="filterEvents('tournament')">🏆 Tournament</button>
+      <button class="filter-btn" data-filter="community" onclick="filterEvents('community')">♟ Community</button>
+      <button class="filter-btn" data-filter="workshop" onclick="filterEvents('workshop')">🎓 Workshop</button>
+      <button class="filter-btn" data-filter="free" onclick="filterEvents('free')">✦ Free</button>
+    </div>
+    <div class="ev-grid" id="evGrid">
+
+      <div class="ec" data-type="tournament">
+        <div class="ec-bar tournament"></div>
+        <div class="ec-head">
+          <div class="ec-date-block featured"><div class="ec-mo">Mar</div><div class="ec-dy">22</div></div>
+          <div class="ec-badges"><span class="badge badge-t">Tournament</span></div>
+        </div>
+        <div class="ec-body">
+          <div class="ec-type">Open Tournament</div>
+          <div class="ec-name">NYC Spring Classic</div>
+          <div class="ec-meta">
+            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Marshall Chess Club, Manhattan</div>
+            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>10:00 AM — All Day</div>
+            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>G/60 · All skill levels</div>
+          </div>
+          <div class="ec-footer">
+            <div class="ec-price"><strong>$15</strong>12 spots left</div>
+            <button class="btn-sm" onclick="openReg('NYC Spring Classic')">Register</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="ec" data-type="community free">
+        <div class="ec-bar free"></div>
+        <div class="ec-head">
+          <div class="ec-date-block"><div class="ec-mo">Mar</div><div class="ec-dy">29</div></div>
+          <div class="ec-badges"><span class="badge badge-c">Community</span><span class="badge badge-f">Free</span></div>
+        </div>
+        <div class="ec-body">
+          <div class="ec-type">Community Night</div>
+          <div class="ec-name">Blitz in the Park</div>
+          <div class="ec-meta">
+            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Washington Square Park</div>
+            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>2:00 PM — 6:00 PM</div>
+            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>5+0 Blitz · All welcome</div>
+          </div>
+          <div class="ec-footer">
+            <div class="ec-price"><span class="free-price">FREE</span>Open spots</div>
+            <button class="btn-sm" onclick="openReg('Blitz in the Park')">I'm In</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="ec" data-type="workshop">
+        <div class="ec-bar workshop"></div>
+        <div class="ec-head">
+          <div class="ec-date-block"><div class="ec-mo">Apr</div><div class="ec-dy">5</div></div>
+          <div class="ec-badges"><span class="badge badge-w">Workshop</span></div>
+        </div>
+        <div class="ec-body">
+          <div class="ec-type">Workshop</div>
+          <div class="ec-name">Endgame Masterclass</div>
+          <div class="ec-meta">
+            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Brooklyn Chess Academy</div>
+            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>1:00 PM — 3:30 PM</div>
+            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>Intermediate–Advanced</div>
+          </div>
+          <div class="ec-footer">
+            <div class="ec-price"><strong>$20</strong>8 spots left</div>
+            <button class="btn-sm" onclick="openReg('Endgame Masterclass')">Register</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="ec" data-type="tournament">
+        <div class="ec-bar tournament"></div>
+        <div class="ec-head">
+          <div class="ec-date-block"><div class="ec-mo">Apr</div><div class="ec-dy">19</div></div>
+          <div class="ec-badges"><span class="badge badge-t">Tournament</span></div>
+        </div>
+        <div class="ec-body">
+          <div class="ec-type">Rated Tournament</div>
+          <div class="ec-name">Bronx Borough Cup</div>
+          <div class="ec-meta">
+            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Bronx Community Center</div>
+            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>11:00 AM — All Day</div>
+            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>G/45 · USCF Rated</div>
+          </div>
+          <div class="ec-footer">
+            <div class="ec-price"><strong>$12</strong>Open reg</div>
+            <button class="btn-sm" onclick="openReg('Bronx Borough Cup')">Register</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="ec" data-type="community free">
+        <div class="ec-bar free"></div>
+        <div class="ec-head">
+          <div class="ec-date-block"><div class="ec-mo">May</div><div class="ec-dy">3</div></div>
+          <div class="ec-badges"><span class="badge badge-c">Community</span><span class="badge badge-f">Free</span></div>
+        </div>
+        <div class="ec-body">
+          <div class="ec-type">Community Night</div>
+          <div class="ec-name">Harlem Chess Social</div>
+          <div class="ec-meta">
+            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Harlem, Manhattan</div>
+            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>3:00 PM — 7:00 PM</div>
+            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>Casual · All levels</div>
+          </div>
+          <div class="ec-footer">
+            <div class="ec-price"><span class="free-price">FREE</span>Drop in</div>
+            <button class="btn-sm" onclick="openReg('Harlem Chess Social')">I'm In</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="ec" data-type="workshop">
+        <div class="ec-bar workshop"></div>
+        <div class="ec-head">
+          <div class="ec-date-block"><div class="ec-mo">May</div><div class="ec-dy">17</div></div>
+          <div class="ec-badges"><span class="badge badge-w">Workshop</span></div>
+        </div>
+        <div class="ec-body">
+          <div class="ec-type">Workshop</div>
+          <div class="ec-name">Attack & Defense Tactics</div>
+          <div class="ec-meta">
+            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Queens Library, Flushing</div>
+            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>12:00 PM — 2:30 PM</div>
+            <div class="ec-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>Beginner–Intermediate</div>
+          </div>
+          <div class="ec-footer">
+            <div class="ec-price"><strong>$15</strong>12 spots</div>
+            <button class="btn-sm" onclick="openReg('Attack & Defense Tactics')">Register</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="no-results" id="noResults">No events match this filter.</div>
+  </div>
+</section>
+
+<!-- STREAM -->
+<section class="stream-sec" id="stream">
+  <div class="stream-inner">
+    <div>
+      <div class="sec-eyebrow">📡 Tune In</div>
+      <h2 class="sec-title">Watch the Stream</h2>
+      <p class="sec-desc">Live analysis, blitz marathons, tournament coverage, and NYC chess — every week.</p>
+      <p class="stream-body-text">From opening theory breakdowns to live game commentary — NYC chess on your screen, raw and real.</p>
+      <a href="#notify" class="btn btn-p">Get Live Alerts</a>
+    </div>
+    <div>
+      <div class="stream-prev">
+        <div class="live-dot"></div>
+        <div class="stream-ico">🎮</div>
+        <div class="stream-txt">Live when streaming</div>
+      </div>
+      <div class="plats">
+        <a href="https://twitch.tv/jayvio_" target="_blank" class="plat ptw">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+          twitch.tv/jayvio_
+        </a>
+        <a href="https://youtube.com/@JayvioNYC" target="_blank" class="plat pyt">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+          @JayvioNYC
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NOTIFY -->
+<section class="notify-sec" id="notify">
+  <div class="notify-inner">
+    <div class="sec-eyebrow" style="text-align:center;">♟ NYC Chess Community</div>
+    <h2 class="sec-title" style="text-align:center;">Join City in Check</h2>
+    <p style="font-size:15px;color:var(--ink-soft);font-weight:300;text-align:center;margin-top:6px;max-width:400px;margin-left:auto;margin-right:auto;line-height:1.7;">Tell us about yourself and the events you care about. Takes 60 seconds.</p>
+    <div style="text-align:center;margin-top:32px;">
+      <button class="btn btn-p" onclick="openJoin()" style="font-size:13px;padding:16px 48px;border-radius:6px;letter-spacing:3px;">
+        Join the Community
+      </button>
+      <p style="font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;letter-spacing:1px;margin-top:14px;">No spam. Unsubscribe anytime.</p>
+    </div>
+  </div>
+</section>
+
+<!-- JOIN MODAL -->
+<div class="join-bg" id="joinBg">
+  <div class="join-modal">
+    <button class="join-modal-close" onclick="closeJoin()">×</button>
+
+    <!-- PROGRESS BAR -->
+    <div class="join-progress">
+      <div class="join-progress-fill" id="joinProg" style="width:20%;"></div>
+    </div>
+
+    <!-- STEP 1: Name + Email -->
+    <div class="join-step active" id="jStep1">
+      <div class="join-step-eyebrow">Step 1 of 5</div>
+      <div class="join-step-title">Who are you?</div>
+      <div class="join-step-sub">Let's start with the basics so we can stay in touch.</div>
+      <input class="join-input" type="text" id="jName" placeholder="Your first name" />
+      <input class="join-input" type="email" id="jEmail" placeholder="Email address" />
+      <div class="join-nav">
+        <div class="join-step-count">1 / 5</div>
+        <button class="join-next" onclick="jNext(1)">Continue →</button>
+      </div>
+    </div>
+
+    <!-- STEP 2: Skill level -->
+    <div class="join-step" id="jStep2">
+      <div class="join-step-eyebrow">Step 2 of 5</div>
+      <div class="join-step-title">How do you play?</div>
+      <div class="join-step-sub">Pick the one that best describes your game right now.</div>
+      <div class="join-options">
+        <div class="join-opt" onclick="toggleSingle(this, 'skill')">Just learning (&lt;600)</div>
+        <div class="join-opt" onclick="toggleSingle(this, 'skill')">Beginner (600–999)</div>
+        <div class="join-opt" onclick="toggleSingle(this, 'skill')">Intermediate (1000–1399)</div>
+        <div class="join-opt" onclick="toggleSingle(this, 'skill')">Club player (1400–1799)</div>
+        <div class="join-opt" onclick="toggleSingle(this, 'skill')">Advanced (1800+)</div>
+        <div class="join-opt" onclick="toggleSingle(this, 'skill')">I just watch 👀</div>
+      </div>
+      <div class="join-nav">
+        <button class="join-back" onclick="jBack(2)">← Back</button>
+        <div class="join-step-count">2 / 5</div>
+        <button class="join-next" onclick="jNext(2)">Continue →</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: Event types -->
+    <div class="join-step" id="jStep3">
+      <div class="join-step-eyebrow">Step 3 of 5</div>
+      <div class="join-step-title">What events interest you?</div>
+      <div class="join-step-sub">Select all that apply — we'll send you what's relevant.</div>
+      <div class="join-options">
+        <div class="join-opt" onclick="toggleMulti(this)">🏆 Rated Tournaments</div>
+        <div class="join-opt" onclick="toggleMulti(this)">♟ Casual Blitz Nights</div>
+        <div class="join-opt" onclick="toggleMulti(this)">🎓 Workshops & Lessons</div>
+        <div class="join-opt" onclick="toggleMulti(this)">🌳 Park Pop-ups</div>
+        <div class="join-opt" onclick="toggleMulti(this)">🍸 Bar Nights</div>
+        <div class="join-opt" onclick="toggleMulti(this)">📡 Online Events</div>
+        <div class="join-opt" onclick="toggleMulti(this)">🎥 Stream Watch Parties</div>
+      </div>
+      <div class="join-nav">
+        <button class="join-back" onclick="jBack(3)">← Back</button>
+        <div class="join-step-count">3 / 5</div>
+        <button class="join-next" onclick="jNext(3)">Continue →</button>
+      </div>
+    </div>
+
+    <!-- STEP 4: Boroughs -->
+    <div class="join-step" id="jStep4">
+      <div class="join-step-eyebrow">Step 4 of 5</div>
+      <div class="join-step-title">Where in NYC?</div>
+      <div class="join-step-sub">Which boroughs work for you? We'll prioritize nearby events.</div>
+      <div class="join-options">
+        <div class="join-opt" onclick="toggleMulti(this)">Manhattan</div>
+        <div class="join-opt" onclick="toggleMulti(this)">Brooklyn</div>
+        <div class="join-opt" onclick="toggleMulti(this)">The Bronx</div>
+        <div class="join-opt" onclick="toggleMulti(this)">Queens</div>
+        <div class="join-opt" onclick="toggleMulti(this)">Staten Island</div>
+        <div class="join-opt" onclick="toggleMulti(this)">I'm outside NYC</div>
+        <div class="join-opt" onclick="toggleMulti(this)">Online only works for me</div>
+      </div>
+      <div class="join-nav">
+        <button class="join-back" onclick="jBack(4)">← Back</button>
+        <div class="join-step-count">4 / 5</div>
+        <button class="join-next" onclick="jNext(4)">Continue →</button>
+      </div>
+    </div>
+
+    <!-- STEP 5: Platforms -->
+    <div class="join-step" id="jStep5">
+      <div class="join-step-eyebrow">Step 5 of 5</div>
+      <div class="join-step-title">Anything else?</div>
+      <div class="join-step-sub">Where do you play online? Optional — helps us connect you.</div>
+      <input class="join-input" type="text" id="jChessHandle" placeholder="Chess.com username (optional)" />
+      <input class="join-input" type="text" id="jLichess" placeholder="Lichess username (optional)" />
+      <div class="join-options" style="margin-top:4px;">
+        <div class="join-opt" onclick="toggleMulti(this)">📬 Event alerts</div>
+        <div class="join-opt on" onclick="toggleMulti(this)">📡 Stream notifications</div>
+        <div class="join-opt" onclick="toggleMulti(this)">👕 Merch drops</div>
+      </div>
+      <div class="join-nav">
+        <button class="join-back" onclick="jBack(5)">← Back</button>
+        <div class="join-step-count">5 / 5</div>
+        <button class="join-next" onclick="jSubmit()" style="background:var(--navy);">Join ♞</button>
+      </div>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="join-success" id="jSuccess" style="display:none;">
+      <div class="join-success-icon">♞</div>
+      <div class="join-success-title">You're In!</div>
+      <p class="join-success-sub">Welcome to City in Check. We'll reach out about events that match your interests.<br><br>See you on the board.</p>
+      <button class="join-next" onclick="closeJoin()" style="margin-top:24px;width:100%;">Done</button>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="ftop">
+    <div>
+      <div class="fbn">City in Check</div>
+      <div class="fbs">NYC Chess Community</div>
+      <div class="fbd">New York's home for chess players, tournaments, and community — on the board and online.</div>
+    </div>
+    <div class="fcol"><h4>Navigate</h4><ul>
+      <li><a href="index.html">Events</a></li>
+      <li><a href="index.html#stream">Stream</a></li>
+      <li><a href="merch.html">Merch</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul></div>
+    <div class="fcol"><h4>Stream</h4><ul>
+      <li><a href="https://twitch.tv/jayvio_" target="_blank">Twitch</a></li>
+      <li><a href="https://youtube.com/@JayvioNYC" target="_blank">YouTube</a></li>
+    </ul></div>
+    <div class="fcol"><h4>More</h4><ul>
+      <li><a href="merch.html">Merch (Soon)</a></li>
+      <li><a href="index.html#notify">Get Notified</a></li>
+    </ul></div>
+  </div>
+  <div class="fbot">
+    <div class="fcp">© 2025 City in Check · NYC Chess</div>
+    <div class="socs">
+      <a href="https://twitch.tv/jayvio_" class="soc" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg></a>
+      <a href="https://youtube.com/@JayvioNYC" class="soc" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg></a>
+      <a href="#" class="soc"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-bg" id="regModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeReg()">×</button>
+    <div style="font-size:22px;margin-bottom:8px;">♞</div>
+    <div class="modal-title">Register</div>
+    <div class="modal-event" id="regEventName"></div>
+    <form onsubmit="handleReg(event)" style="display:flex;flex-direction:column;gap:11px;">
+      <input class="ninput" type="text" placeholder="Full name" required>
+      <input class="ninput" type="email" placeholder="Email address" required>
+      <input class="ninput" type="text" placeholder="Chess.com / Lichess handle (optional)">
+      <select class="ninput" style="color:var(--ink-soft);">
+        <option value="">Skill level...</option>
+        <option>Beginner (&lt;800)</option>
+        <option>Intermediate (800–1400)</option>
+        <option>Advanced (1400–1800)</option>
+        <option>Expert (1800+)</option>
+      </select>
+      <button type="submit" class="btn btn-p" style="text-align:center;margin-top:4px;">Confirm Registration</button>
+    </form>
+    <div id="regSuc" style="display:none;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--green);margin-top:12px;text-align:center;">✓ You're registered! See you on the board.</div>
+  </div>
+</div>
+
+<script>
+// HERO CAROUSEL — auto, no arrows
+const SLIDE_DUR = 5000;
+let heroCur = 0;
+const slides = document.querySelectorAll('.hero-slide');
+const dots = document.querySelectorAll('.hdot');
+let heroT;
+
+function heroGo(n) {
+  slides[heroCur].classList.remove('active');
+  dots[heroCur].classList.remove('on');
+  heroCur = (n + slides.length) % slides.length;
+  slides[heroCur].classList.add('active');
+  dots[heroCur].classList.add('on');
+  resetProg();
+}
+
+function resetProg() {
+  clearTimeout(heroT);
+  heroT = setTimeout(() => heroGo(heroCur + 1), SLIDE_DUR);
+}
+
+resetProg();
+
+// NAV — goes light when scrolled past hero
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('light', window.scrollY > window.innerHeight - 80);
+});
+
+// FILTER
+function filterEvents(type) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('on', b.dataset.filter === type));
+  let v = 0;
+  document.querySelectorAll('#evGrid .ec').forEach(c => {
+    const show = type === 'all' || (c.dataset.type || '').includes(type);
+    c.setAttribute('data-hidden', show ? 'false' : 'true');
+    if (show) v++;
+  });
+  document.getElementById('noResults').style.display = v === 0 ? 'block' : 'none';
+}
+
+// JOIN MODAL
+let jCurrent = 1;
+const jTotal = 5;
+
+function openJoin() {
+  jCurrent = 1;
+  document.querySelectorAll('.join-step').forEach(s => s.classList.remove('active'));
+  document.getElementById('jStep1').classList.add('active');
+  document.getElementById('jSuccess').style.display = 'none';
+  document.getElementById('joinProg').style.width = '20%';
+  document.getElementById('joinBg').style.display = 'flex';
+}
+
+function closeJoin() {
+  document.getElementById('joinBg').style.display = 'none';
+}
+
+function jNext(step) {
+  if (step === 1) {
+    const name = document.getElementById('jName').value.trim();
+    const email = document.getElementById('jEmail').value.trim();
+    if (!name) { document.getElementById('jName').focus(); document.getElementById('jName').style.borderColor = 'var(--accent)'; return; }
+    if (!email || !email.includes('@')) { document.getElementById('jEmail').focus(); document.getElementById('jEmail').style.borderColor = 'var(--accent)'; return; }
+  }
+  const next = step + 1;
+  document.getElementById('jStep' + step).classList.remove('active');
+  document.getElementById('jStep' + next).classList.add('active');
+  jCurrent = next;
+  document.getElementById('joinProg').style.width = (next / jTotal * 100) + '%';
+}
+
+function jBack(step) {
+  document.getElementById('jStep' + step).classList.remove('active');
+  const prev = step - 1;
+  document.getElementById('jStep' + prev).classList.add('active');
+  jCurrent = prev;
+  document.getElementById('joinProg').style.width = (prev / jTotal * 100) + '%';
+}
+
+function toggleSingle(el, group) {
+  el.closest('.join-options').querySelectorAll('.join-opt').forEach(o => o.classList.remove('on'));
+  el.classList.add('on');
+}
+
+function toggleMulti(el) {
+  el.classList.toggle('on');
+}
+
+function jSubmit() {
+  document.getElementById('jStep5').classList.remove('active');
+  document.getElementById('joinProg').style.width = '100%';
+  document.getElementById('jSuccess').style.display = 'block';
+}
+
+document.getElementById('joinBg').addEventListener('click', e => {
+  if (e.target === document.getElementById('joinBg')) closeJoin();
+});
+
+// MODAL
+function openReg(name) {
+  document.getElementById('regEventName').textContent = name;
+  document.getElementById('regModal').style.display = 'flex';
+  document.getElementById('regSuc').style.display = 'none';
+}
+function closeReg() { document.getElementById('regModal').style.display = 'none'; }
+function handleReg(e) {
+  e.preventDefault();
+  document.getElementById('regSuc').style.display = 'block';
+  setTimeout(closeReg, 2200);
+}
+document.getElementById('regModal').addEventListener('click', e => {
+  if (e.target === document.getElementById('regModal')) closeReg();
+});
+</script>
+</body>
+</html>
