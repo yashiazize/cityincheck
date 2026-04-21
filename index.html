@@ -281,15 +281,16 @@ footer{background:var(--navy);padding:56px 52px 28px;}
         <p class="sec-desc">From casual blitz nights to rated tournaments — there's always a game in this city.</p>
       </div>
     </div>
-    <div class="filter-bar">
-      <button class="filter-btn on" data-filter="all" onclick="filterEvents('all')">All Events</button>
-      <button class="filter-btn" data-filter="tournament" onclick="filterEvents('tournament')">🏆 Tournament</button>
-      <button class="filter-btn" data-filter="community" onclick="filterEvents('community')">♟ Community</button>
-      <button class="filter-btn" data-filter="workshop" onclick="filterEvents('workshop')">🎓 Workshop</button>
-      <button class="filter-btn" data-filter="free" onclick="filterEvents('free')">✦ Free</button>
-    </div>
-    <div class="ev-grid" id="evGrid"></div>
-    <div class="no-results" id="noResults">No events match this filter.</div>
+    <iframe
+      src="https://luma.com/embed/calendar/cal-mv1ShyAgEAbOMck/events"
+      width="100%"
+      height="600"
+      frameborder="0"
+      style="border:1px solid rgba(0,0,0,0.08);border-radius:10px;display:block;"
+      allowfullscreen=""
+      aria-hidden="false"
+      tabindex="0"
+    ></iframe>
   </div>
 </section>
 
