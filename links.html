@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>City in Check — Connect & Follow</title>
+<meta name="description" content="All the official City in Check links in one place — Twitch, Discord, Instagram, YouTube and more.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:#0d1b2e; --navy-mid:#1e3358; --navy-deep:#0a1424;
+  --bg:#070d18; --surface:rgba(255,255,255,0.03); --surface-hover:rgba(255,255,255,0.06);
+  --ink:#f5f8fc; --ink-soft:rgba(200,212,224,0.78); --muted:rgba(200,212,224,0.45);
+  --border:rgba(255,255,255,0.08); --border-hi:rgba(91,159,212,0.4);
+  --accent:#5b9fd4; --accent-dk:#3d7fb8; --accent-glow:rgba(91,159,212,0.25);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  background-image:radial-gradient(circle at 20% 0%,rgba(30,51,88,0.5) 0%,transparent 55%),radial-gradient(circle at 85% 10%,rgba(13,33,55,0.55) 0%,transparent 50%);
+  background-attachment:fixed;
+  color:var(--ink);font-family:'DM Sans',sans-serif;overflow-x:hidden;min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;padding:0 18px 60px;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+.page{width:100%;max-width:760px;}
+
+/* HERO */
+.lt-hero{
+  position:relative;overflow:hidden;border-radius:0 0 24px 24px;
+  margin:0 -18px 30px;padding:48px 30px 40px;
+  background:linear-gradient(160deg,#0b1520 0%,#0d2137 45%,#15314f 100%);
+  border-bottom:1px solid var(--border);
+}
+.lt-hero::after{content:'♞';position:absolute;right:-30px;top:50%;transform:translateY(-50%);font-size:300px;line-height:1;color:#fff;opacity:0.05;pointer-events:none;}
+.lt-hero-inner{position:relative;z-index:1;max-width:520px;}
+.lt-brand{display:flex;align-items:center;gap:18px;}
+.lt-logo{width:84px;height:84px;border-radius:50%;flex-shrink:0;border:2px solid rgba(91,159,212,0.45);box-shadow:0 8px 30px rgba(0,0,0,0.4);background:var(--navy-deep);object-fit:cover;}
+.lt-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,11vw,68px);letter-spacing:3px;line-height:.86;color:#fff;}
+.lt-tag{margin-top:18px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--ink-soft);}
+.lt-tag em{color:var(--accent);font-style:normal;}
+.lt-divider{display:flex;align-items:center;gap:12px;margin-top:14px;color:rgba(255,255,255,0.18);}
+.lt-divider::before,.lt-divider::after{content:'';height:1px;flex:1;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);}
+
+/* SECTION HEADER */
+.sec-head{text-align:center;margin:8px 0 22px;}
+.sec-eyebrow{display:inline-flex;align-items:center;gap:12px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:4px;color:var(--accent);text-transform:uppercase;margin-bottom:8px;}
+.sec-eyebrow::before,.sec-eyebrow::after{content:'';width:28px;height:1px;background:rgba(91,159,212,0.4);}
+.sec-sub{font-size:14px;color:var(--ink-soft);font-weight:300;}
+
+/* LINK GRID */
+.links-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+.lt-card{
+  display:flex;align-items:center;gap:14px;text-decoration:none;position:relative;
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px;
+  transition:transform .22s,border-color .22s,background .22s,box-shadow .22s;animation:fadeUp .5s ease both;
+}
+.lt-card:hover{transform:translateY(-3px);background:var(--surface-hover);border-color:var(--border-hi);box-shadow:0 14px 34px rgba(0,0,0,0.35);}
+.lt-ico{width:54px;height:54px;border-radius:13px;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#fff;}
+.lt-ico svg{width:28px;height:28px;}
+.ico-twitch{background:#9146ff;}
+.ico-discord{background:#5865f2;}
+.ico-web{background:linear-gradient(135deg,var(--accent),var(--accent-dk));}
+.ico-instagram{background:radial-gradient(circle at 30% 107%,#fdf497 0%,#fd5949 45%,#d6249f 60%,#285aeb 90%);}
+.ico-youtube{background:#ff0000;}
+.lt-txt{flex:1;min-width:0;}
+.lt-name{font-family:'Bebas Neue',sans-serif;font-size:21px;letter-spacing:1.5px;color:#fff;line-height:1;}
+.lt-desc{font-size:12.5px;color:var(--muted);font-weight:300;margin-top:4px;line-height:1.35;}
+.lt-arrow{color:var(--muted);flex-shrink:0;transition:transform .22s,color .22s;}
+.lt-card:hover .lt-arrow{color:var(--accent);transform:translateX(3px);}
+
+/* ABOUT */
+.about{
+  margin-top:24px;background:var(--surface);border:1px solid var(--border);border-radius:16px;
+  padding:30px;display:flex;gap:26px;align-items:flex-start;
+}
+.about-piece{font-size:96px;line-height:1;color:var(--accent);opacity:.85;flex-shrink:0;filter:drop-shadow(0 8px 18px rgba(0,0,0,0.4));}
+.about-title{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:2px;color:var(--accent);margin-bottom:10px;}
+.about-body{font-size:14.5px;color:var(--ink-soft);line-height:1.7;font-weight:300;}
+.about-rule{display:flex;align-items:center;gap:12px;margin:18px 0 14px;color:rgba(255,255,255,0.16);}
+.about-rule::before,.about-rule::after{content:'';height:1px;flex:1;background:rgba(255,255,255,0.12);}
+.about-thanks{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);}
+
+.lt-foot{text-align:center;margin-top:28px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+.lt-foot a{color:var(--ink-soft);text-decoration:none;}
+.lt-foot a:hover{color:var(--accent);}
+
+@media(max-width:560px){
+  .links-grid{grid-template-columns:1fr;}
+  .lt-hero{padding:40px 22px 34px;}
+  .lt-brand{gap:14px;}
+  .lt-logo{width:66px;height:66px;}
+  .about{flex-direction:column;align-items:center;text-align:center;gap:14px;padding:26px 22px;}
+  .about-piece{font-size:72px;}
+  .about-rule{justify-content:center;}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <header class="lt-hero">
+    <div class="lt-hero-inner">
+      <div class="lt-brand">
+        <img src="assets/logo.png" alt="City in Check logo" class="lt-logo">
+        <h1 class="lt-title">City in<br>Check</h1>
+      </div>
+      <div class="lt-tag">Every move shapes what <em>we build.</em></div>
+      <div class="lt-divider">♟</div>
+    </div>
+  </header>
+
+  <!-- CONNECT & FOLLOW -->
+  <div class="sec-head">
+    <div class="sec-eyebrow">Connect &amp; Follow</div>
+    <p class="sec-sub">Follow the journey, join the community, and stay up to date.</p>
+  </div>
+
+  <div class="links-grid">
+
+    <a class="lt-card" href="https://twitch.tv/cityincheck" target="_blank" rel="noopener" style="animation-delay:.04s">
+      <div class="lt-ico ico-twitch">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+      </div>
+      <div class="lt-txt"><div class="lt-name">Watch Live</div><div class="lt-desc">Live on Twitch</div></div>
+      <svg class="lt-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+
+    <a class="lt-card" href="https://discord.gg/cityincheck" target="_blank" rel="noopener" style="animation-delay:.08s">
+      <div class="lt-ico ico-discord">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.369a19.79 19.79 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.6 12.6 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.1 13.1 0 01-1.872-.892.077.077 0 01-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.099.246.197.372.291a.077.077 0 01-.006.128 12.3 12.3 0 01-1.873.891.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.84 19.84 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.331c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+      </div>
+      <div class="lt-txt"><div class="lt-name">Join Discord</div><div class="lt-desc">Chat with the community</div></div>
+      <svg class="lt-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+
+    <a class="lt-card" href="index.html" style="animation-delay:.12s">
+      <div class="lt-ico ico-web">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+      </div>
+      <div class="lt-txt"><div class="lt-name">Official Website</div><div class="lt-desc">Learn more about City in Check</div></div>
+      <svg class="lt-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+
+    <a class="lt-card" href="https://instagram.com/cityincheck" target="_blank" rel="noopener" style="animation-delay:.16s">
+      <div class="lt-ico ico-instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </div>
+      <div class="lt-txt"><div class="lt-name">Instagram</div><div class="lt-desc">Behind the scenes &amp; updates</div></div>
+      <svg class="lt-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+
+    <a class="lt-card" href="https://youtube.com/@cityincheck" target="_blank" rel="noopener" style="animation-delay:.2s">
+      <div class="lt-ico ico-youtube">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+      </div>
+      <div class="lt-txt"><div class="lt-name">YouTube</div><div class="lt-desc">Watch &amp; support the content</div></div>
+      <svg class="lt-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+
+    <a class="lt-card" href="https://discord.gg/cityincheck" target="_blank" rel="noopener" style="animation-delay:.24s">
+      <div class="lt-ico ico-discord">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.369a19.79 19.79 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.6 12.6 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.1 13.1 0 01-1.872-.892.077.077 0 01-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.099.246.197.372.291a.077.077 0 01-.006.128 12.3 12.3 0 01-1.873.891.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.84 19.84 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.331c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+      </div>
+      <div class="lt-txt"><div class="lt-name">Discord Server</div><div class="lt-desc">Join the full City in Check server</div></div>
+      <svg class="lt-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+
+  </div>
+
+  <!-- ABOUT -->
+  <section class="about">
+    <div class="about-piece">♜</div>
+    <div>
+      <div class="about-title">About City in Check</div>
+      <p class="about-body">City in Check is a community-driven project focused on creativity, storytelling, and collaboration. We're building something bigger — together.</p>
+      <div class="about-rule">♟</div>
+      <div class="about-thanks">Thanks for being part of the journey.</div>
+    </div>
+  </section>
+
+  <div class="lt-foot">© 2025 City in Check · <a href="index.html">cityincheck</a></div>
+
+</div>
+</body>
+</html>
