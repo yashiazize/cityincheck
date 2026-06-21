@@ -25,7 +25,7 @@ body{background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif;over
 nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:14px 52px;background:rgba(13,27,46,0.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.07);transition:all .3s;}
 nav.light{background:rgba(244,242,238,0.94);border-bottom:1px solid var(--border);}
 .nav-logo{display:flex;align-items:center;gap:11px;text-decoration:none;}
-.nav-icon{width:38px;height:38px;border-radius:50%;border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:18px;background:var(--navy-mid);color:white;}
+.nav-icon{width:38px;height:38px;border-radius:50%;border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:18px;background:var(--navy-mid);color:white;object-fit:cover;}
 .nav-name{font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:2px;color:#f5f8fc;line-height:1;transition:color .3s;}
 nav.light .nav-name{color:var(--navy);}
 .nav-sub{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:3px;color:var(--accent);text-transform:uppercase;}
@@ -56,6 +56,7 @@ nav.light .nav-links a{color:var(--ink-soft);}
 .slide-piece{position:absolute;right:6%;top:50%;transform:translateY(-50%);font-size:340px;opacity:0.055;color:white;pointer-events:none;z-index:1;line-height:1;}
 .hero-content{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:0 64px 80px;}
 .hero-inner{max-width:760px;}
+.hero-logo{width:96px;height:96px;border-radius:50%;border:2px solid rgba(91,159,212,0.5);background:var(--navy);object-fit:cover;margin-bottom:22px;box-shadow:0 10px 34px rgba(0,0,0,0.45);animation:fadeUp .8s ease both;}
 .hero-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:4px;color:var(--accent);text-transform:uppercase;margin-bottom:16px;animation:fadeUp .8s ease both;}
 .hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,9vw,106px);letter-spacing:4px;line-height:.92;color:#fff;animation:fadeUp .8s .1s ease both;}
 .hero-title em{color:var(--accent);font-style:normal;}
@@ -221,7 +222,7 @@ footer{background:var(--navy);padding:56px 52px 28px;}
 
 <nav id="nav">
   <a href="index.html" class="nav-logo">
-    <div class="nav-icon">♞</div>
+    <img src="assets/logo.png" alt="City in Check" class="nav-icon">
     <div>
       <div class="nav-name">City in Check</div>
       <div class="nav-sub">NYC Chess</div>
@@ -231,18 +232,9 @@ footer{background:var(--navy);padding:56px 52px 28px;}
     <li><a href="index.html" class="active">Events</a></li>
     <li><a href="index.html#stream">Stream</a></li>
     <li><a href="about.html">About</a></li>
-    <li><a href="#" class="nav-cta" onclick="openJoin();return false;">Join Community</a></li>
+    <li><a href="https://discord.gg/sYKgpJE23K" target="_blank" rel="noopener" class="nav-cta">Join Discord</a></li>
   </ul>
 </nav>
-
-<!-- STATS BAR — fixed right under nav -->
-<div class="stats-bar">
-  <div class="stat-item"><div class="stat-n" id="memberCount">500+</div><div class="stat-l">Members</div></div>
-  <div class="stat-item"><div class="stat-n">24</div><div class="stat-l">Events This Year</div></div>
-  <div class="stat-item"><div class="stat-n">5</div><div class="stat-l">NYC Boroughs</div></div>
-  <div class="stat-item"><div class="stat-n">LIVE</div><div class="stat-l">Weekly Stream</div></div>
-  <div class="stat-item"><div class="stat-n">2</div><div class="stat-l">Venues</div></div>
-</div>
 
 <!-- HERO — full-bleed photo carousel, auto, no arrows -->
 <section id="hero">
@@ -254,12 +246,13 @@ footer{background:var(--navy);padding:56px 52px 28px;}
   </div>
   <div class="hero-content">
     <div class="hero-inner">
+      <img src="assets/logo.png" alt="City in Check" class="hero-logo">
       <div class="hero-eyebrow">♟ New York City Chess Community</div>
       <h1 class="hero-title">City<br><em>in Check</em></h1>
       <p class="hero-sub">Where NYC's chess players compete, connect, and level up — from Washington Square to your screen.</p>
       <div class="hero-btns">
         <a href="#events" class="btn btn-p">View Upcoming Events</a>
-        <a href="#" class="btn btn-o" onclick="openJoin();return false;">Join Community</a>
+        <a href="https://discord.gg/sYKgpJE23K" target="_blank" rel="noopener" class="btn btn-o">Join Discord</a>
       </div>
     </div>
   </div>
@@ -302,7 +295,7 @@ footer{background:var(--navy);padding:56px 52px 28px;}
       <h2 class="sec-title">Watch the Stream</h2>
       <p class="sec-desc">Live analysis, blitz marathons, tournament coverage, and NYC chess — every week.</p>
       <p class="stream-body-text">From opening theory breakdowns to live game commentary — NYC chess on your screen, raw and real.</p>
-      <a href="#" class="btn btn-p" onclick="openJoin();return false;">Join Community</a>
+      <a href="https://discord.gg/sYKgpJE23K" target="_blank" rel="noopener" class="btn btn-p">Join Discord</a>
     </div>
     <div>
       <div class="stream-prev" id="twitchEmbed"></div>
@@ -325,12 +318,12 @@ footer{background:var(--navy);padding:56px 52px 28px;}
   <div class="notify-inner">
     <div class="sec-eyebrow" style="text-align:center;">♟ NYC Chess Community</div>
     <h2 class="sec-title" style="text-align:center;">Join City in Check</h2>
-    <p style="font-size:15px;color:var(--ink-soft);font-weight:300;text-align:center;margin-top:6px;max-width:400px;margin-left:auto;margin-right:auto;line-height:1.7;">Tell us about yourself and the events you care about. Takes 60 seconds.</p>
+    <p style="font-size:15px;color:var(--ink-soft);font-weight:300;text-align:center;margin-top:6px;max-width:400px;margin-left:auto;margin-right:auto;line-height:1.7;">Jump into our Discord to chat, find games, and stay in the loop on every event.</p>
     <div style="text-align:center;margin-top:32px;">
-      <button class="btn btn-p" onclick="openJoin()" style="font-size:13px;padding:16px 48px;border-radius:6px;letter-spacing:3px;">
-        Join the Community
-      </button>
-      <p style="font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;letter-spacing:1px;margin-top:14px;">No spam. Unsubscribe anytime.</p>
+      <a href="https://discord.gg/sYKgpJE23K" target="_blank" rel="noopener" class="btn btn-p" style="font-size:13px;padding:16px 48px;border-radius:6px;letter-spacing:3px;">
+        Join Discord
+      </a>
+      <p style="font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;letter-spacing:1px;margin-top:14px;">Free to join · See you on the board.</p>
     </div>
   </div>
 </section>
@@ -408,7 +401,7 @@ footer{background:var(--navy);padding:56px 52px 28px;}
     </ul></div>
     <div class="fcol"><h4>More</h4><ul>
       <li><a href="merch.html">Merch (Soon)</a></li>
-      <li><a href="#" onclick="openJoin();return false;">Join Community</a></li>
+      <li><a href="https://discord.gg/sYKgpJE23K" target="_blank" rel="noopener">Join Discord</a></li>
     </ul></div>
   </div>
   <div class="fbot">
@@ -501,17 +494,6 @@ function closeJoin() { document.getElementById('joinBg').style.display = 'none';
 document.getElementById('joinBg').addEventListener('click', e => {
   if (e.target === document.getElementById('joinBg')) closeJoin();
 });
-
-// MEMBER COUNTER — one increment per session, persisted in localStorage
-(function() {
-  if (!sessionStorage.getItem('cic_counted')) {
-    sessionStorage.setItem('cic_counted', '1');
-    const v = parseInt(localStorage.getItem('cic_views') || '0') + 1;
-    localStorage.setItem('cic_views', v);
-  }
-  const views = parseInt(localStorage.getItem('cic_views') || '0');
-  document.getElementById('memberCount').textContent = (500 + views) + '+';
-})();
 
 // EVENTS ENGINE
 const SVG_LOC = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>';
