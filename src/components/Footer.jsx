@@ -15,6 +15,7 @@ export default function Footer() {
             <li><a href="/">Events</a></li>
             <li><a href="/#stream">Stream</a></li>
             <li><a href="/about.html">About</a></li>
+            <li><a href="/links.html">Links</a></li>
           </ul>
         </div>
         <div className="fcol">
