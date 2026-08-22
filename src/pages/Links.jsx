@@ -4,8 +4,8 @@ import { InstagramIcon, DiscordIcon, TwitchIcon, YoutubeIcon, WebIcon, ArrowIcon
 const links = [
   { href: 'https://instagram.com/cityincheck', icon: InstagramIcon, iconClass: 'ico-instagram', name: 'Instagram', desc: 'Drop a follow on IG!', delay: '.04s', external: true },
   { href: 'https://discord.gg/sYKgpJE23K', icon: DiscordIcon, iconClass: 'ico-discord', name: 'Join Discord', desc: 'Chat with the community!', delay: '.08s', external: true },
-  { href: 'https://twitch.tv/cityincheck', icon: TwitchIcon, iconClass: 'ico-twitch', name: 'Watch Live', desc: 'Catch a Live Stream!', delay: '.12s', external: true },
-  { href: 'https://youtube.com/@cityincheck', icon: YoutubeIcon, iconClass: 'ico-youtube', name: 'YouTube', desc: 'Support the content!', delay: '.16s', external: true },
+  { href: 'https://twitch.tv/jayvio', icon: TwitchIcon, iconClass: 'ico-twitch', name: 'Watch Live', desc: 'Catch a Live Stream!', delay: '.12s', external: true },
+  { href: 'https://youtube.com/@JayvioNYC', icon: YoutubeIcon, iconClass: 'ico-youtube', name: 'YouTube', desc: 'Support the content!', delay: '.16s', external: true },
   { href: '/', icon: WebIcon, iconClass: 'ico-web', name: 'Official Website', desc: 'Discover City in Check!', delay: '.2s', external: false },
 ]
 
