@@ -14,8 +14,8 @@ export default function Footer() {
           <ul>
             <li><a href="/">Events</a></li>
             <li><a href="/#stream">Stream</a></li>
-            <li><a href="/about.html">About</a></li>
-            <li><a href="/links.html">Links</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/links">Links</a></li>
           </ul>
         </div>
         <div className="fcol">
@@ -30,7 +30,7 @@ export default function Footer() {
           <ul>
             <li><a href="https://jayvio-shop.fourthwall.com/en-usd" target="_blank" rel="noopener">Merch</a></li>
             <li><a href="https://discord.gg/sYKgpJE23K" target="_blank" rel="noopener">Join Discord</a></li>
-            <li><a href="/portfolio.html">Portfolio</a></li>
+            <li><a href="/portfolio">Portfolio</a></li>
           </ul>
         </div>
       </div>

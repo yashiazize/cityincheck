@@ -39,7 +39,7 @@ export default function Nav({ active, scrollAware = false }) {
       <ul id="nav-links" className={`nav-links${menuOpen ? ' open' : ''}`}>
         <li><a href="/" className={active === 'events' ? 'active' : ''} onClick={() => setMenuOpen(false)}>Events</a></li>
         <li><a href="/#stream" onClick={() => setMenuOpen(false)}>Stream</a></li>
-        <li><a href="/about.html" className={active === 'about' ? 'active' : ''} onClick={() => setMenuOpen(false)}>About</a></li>
+        <li><a href="/about" className={active === 'about' ? 'active' : ''} onClick={() => setMenuOpen(false)}>About</a></li>
         <li><a href="https://jayvio-shop.fourthwall.com/en-usd" target="_blank" rel="noopener">Merch</a></li>
         <li><a href="https://discord.gg/sYKgpJE23K" target="_blank" rel="noopener" className="nav-cta">Join Discord</a></li>
       </ul>
