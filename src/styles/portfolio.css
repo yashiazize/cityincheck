@@ -31,7 +31,6 @@ button{font-family:inherit;cursor:pointer;}
 
 /* shared */
 .eyebrow{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--text-2);font-weight:500;}
-.portfolio-kicker{font-size:22px;margin-bottom:16px;}
 .gold-bar{width:40px;height:4px;background:var(--gold);border-radius:2px;margin-bottom:14px;}
 .btn{
   display:inline-flex;align-items:center;justify-content:center;height:48px;padding:0 26px;
