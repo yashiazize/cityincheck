@@ -30,6 +30,7 @@ export default function Footer() {
           <ul>
             <li><a href="/merch.html">Merch (Soon)</a></li>
             <li><a href="https://discord.gg/sYKgpJE23K" target="_blank" rel="noopener">Join Discord</a></li>
+            <li><a href="/portfolio.html">Artist: Jeremy</a></li>
           </ul>
         </div>
       </div>
