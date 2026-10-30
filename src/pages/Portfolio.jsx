@@ -1,12 +1,17 @@
 import { useEffect, useMemo, useState } from 'react'
+import '../styles/light-theme.css'
 import '../styles/portfolio.css'
 import { portfolioWork, categories } from '../portfolio-data.jsx'
+import Nav from '../components/Nav.jsx'
+import Footer from '../components/Footer.jsx'
 
 const sectionMeta = {
   illustrations: { title: 'Illustrations', blurb: 'Character pieces and personal work, painted digitally and traditionally.' },
+  drawings: { title: 'Drawings', blurb: 'Quick sketches, studies, and personal doodles.' },
   emotes: { title: 'Emotes', blurb: 'Twitch & Discord emotes built to read clearly at tiny sizes.' },
   'profile-photos': { title: 'Profile Photos', blurb: 'Custom avatars for streamers, gamers, and online handles.' },
   stickers: { title: 'Stickers', blurb: 'Die-cut vinyl stickers, ready to print or ship.' },
+  merch: { title: 'Merch Designs', blurb: 'Apparel and product art made for the shop.' },
 }
 
 function FrameMedia({ item }) {
@@ -55,18 +60,30 @@ function StickerFrame({ item }) {
   )
 }
 
+function MerchCard({ item }) {
+  return (
+    <div className="ill-card">
+      <div className="ill-frame"><FrameMedia item={item} /></div>
+      <div className="ill-title">{item.title}</div>
+      <div className="ill-meta">{item.product} · {item.year}</div>
+    </div>
+  )
+}
+
 const renderers = {
   illustrations: { Card: IllustrationCard, gridClass: 'ill-grid' },
+  drawings: { Card: IllustrationCard, gridClass: 'ill-grid' },
   emotes: { Card: EmoteCard, gridClass: 'emote-grid' },
   'profile-photos': { Card: ProfilePhotoItem, gridClass: 'pfp-grid' },
   stickers: { Card: StickerFrame, gridClass: 'sticker-grid' },
+  merch: { Card: MerchCard, gridClass: 'ill-grid' },
 }
 
 function encodeForm(data) {
   return Object.keys(data).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`).join('&')
 }
 
-const commissionCategories = ['Illustration', 'Emotes', 'Profile photo', 'Stickers', 'Something else']
+const commissionCategories = ['Illustration', 'Drawing', 'Emotes', 'Profile photo', 'Stickers', 'Merch design', 'Something else']
 
 function CommissionForm() {
   const [status, setStatus] = useState('idle') // idle | sending | sent | error
@@ -236,19 +253,12 @@ export default function Portfolio() {
 
   return (
     <div data-accent="sky">
-      <header className="site-header">
-        <div className="wrap header-row">
-          <a href="#top" className="logo">Jayvio<span className="dot">.</span></a>
-          <ul className="main-nav">
-            <li><a href="#work">Work</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
-      </header>
+      <Nav />
 
       <section className="hero" id="top">
         <div className="wrap">
-          <div className="eyebrow">Graphinc Designer · Illustator</div>
+          <div className="sec-eyebrow portfolio-kicker">Portfolio</div>
+          <div className="eyebrow">Graphic Designer · Illustrator</div>
           <h1 className="hero-headline">Design for creators, streamers and brands.</h1>
           <p className="hero-bio">I'm an NYC-based illustrator and streamer who loves bringing other people's ideas to life. Working digitally lets me explore a different style with every project.</p>
         </div>
@@ -312,6 +322,8 @@ export default function Portfolio() {
       </div>
 
       {showCommissionModal && <CommissionModal onClose={() => setShowCommissionModal(false)} />}
+
+      <Footer />
     </div>
   )
 }
