@@ -33,7 +33,7 @@ function IllustrationCard({ item, onOpen }) {
     <div className="ill-card">
       <div className="ill-frame"><FrameMedia item={item} onOpen={onOpen} /></div>
       <div className="ill-title">{item.title}</div>
-      <div className="ill-meta">{item.medium}{item.year ? ` · ${item.year}` : ''}</div>
+      <div className="ill-meta">{item.medium}</div>
     </div>
   )
 }
@@ -52,7 +52,7 @@ function ProfilePhotoItem({ item, onOpen }) {
     <div className="pfp-item">
       <div className="pfp-frame"><FrameMedia item={item} onOpen={onOpen} /></div>
       <div className="pfp-handle">{item.handle}</div>
-      <div className="pfp-meta">{item.style}{item.year ? ` · ${item.year}` : ''}</div>
+      <div className="pfp-meta">{item.style}</div>
     </div>
   )
 }
@@ -72,7 +72,7 @@ function MerchCard({ item, onOpen }) {
     <div className="ill-card">
       <div className="ill-frame"><FrameMedia item={item} onOpen={onOpen} /></div>
       <div className="ill-title">{item.title}</div>
-      <div className="ill-meta">{item.product}{item.year ? ` · ${item.year}` : ''}</div>
+      <div className="ill-meta">{item.product}</div>
     </div>
   )
 }

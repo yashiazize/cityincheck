@@ -10,7 +10,7 @@ export const portfolioWork = [
 
   // Drawings
   { category: 'drawings', image: '/assets/portfolio/drawings/ScentPortrait.png', alt: 'Graphite pencil portrait of a woman smelling sunflowers', title: 'Scent Portrait', medium: 'Graphite' },
-  { category: 'drawings', image: '/assets/portfolio/drawings/Skull.png', alt: 'Graphite study of a human skull in profile', title: 'Skull Study', medium: 'Graphite', year: '2025' },
+  { category: 'drawings', image: '/assets/portfolio/drawings/Skull.png', alt: 'Graphite study of a human skull in profile', title: 'Skull Study', medium: 'Graphite' },
   { category: 'drawings', image: '/assets/portfolio/drawings/StillLife.png', alt: 'Graphite still life drawing of plush toys and a drinking glass', title: 'Still Life Study', medium: 'Graphite' },
   { category: 'drawings', image: '/assets/portfolio/drawings/monkeybusiness.png', alt: 'Graphite drawing of two stuffed monkey toys', title: 'Monkey Business', medium: 'Graphite' },
 
