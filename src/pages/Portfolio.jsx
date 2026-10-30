@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from 'react'
 import '../styles/light-theme.css'
 import '../styles/portfolio.css'
 import { portfolioWork, categories } from '../portfolio-data.jsx'
-import Nav from '../components/Nav.jsx'
 import Footer from '../components/Footer.jsx'
 
 const sectionMeta = {
@@ -253,16 +252,20 @@ export default function Portfolio() {
 
   return (
     <div data-accent="sky">
-      <Nav />
+      <header className="site-header">
+        <div className="wrap header-row">
+          <a href="#top" className="logo">Jayvio<span className="dot">.</span></a>
+          <ul className="main-nav">
+            <li><a href="#work">Work</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </header>
 
       <section className="hero" id="top">
         <div className="wrap">
           <div className="sec-eyebrow portfolio-kicker">Portfolio</div>
-          <div className="eyebrow">
-            <span className="eyebrow-name">Jayvio</span>
-            <span className="eyebrow-dot"></span>
-            Graphic Designer · Illustrator
-          </div>
+          <div className="eyebrow">Graphic Designer · Illustrator</div>
           <h1 className="hero-headline">Design for creators, streamers and brands.</h1>
           <p className="hero-bio">I'm an NYC-based illustrator and streamer who loves bringing other people's ideas to life. Working digitally lets me explore a different style with every project.</p>
         </div>
