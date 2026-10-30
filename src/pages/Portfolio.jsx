@@ -5,66 +5,74 @@ import { portfolioWork, categories } from '../portfolio-data.jsx'
 import Footer from '../components/Footer.jsx'
 
 const sectionMeta = {
+  stickers: { title: 'Stickers', blurb: 'Die-cut vinyl stickers, ready to print or ship.' },
+  'profile-photos': { title: 'Profile Photos', blurb: 'Custom avatars for streamers, gamers, and online handles.' },
   illustrations: { title: 'Illustrations', blurb: 'Character pieces and personal work, painted digitally and traditionally.' },
+  merch: { title: 'Merch Designs', blurb: 'Apparel and product art made for the shop.' },
   drawings: { title: 'Drawings', blurb: 'Quick sketches, studies, and personal doodles.' },
   emotes: { title: 'Emotes', blurb: 'Twitch & Discord emotes built to read clearly at tiny sizes.' },
-  'profile-photos': { title: 'Profile Photos', blurb: 'Custom avatars for streamers, gamers, and online handles.' },
-  stickers: { title: 'Stickers', blurb: 'Die-cut vinyl stickers, ready to print or ship.' },
-  merch: { title: 'Merch Designs', blurb: 'Apparel and product art made for the shop.' },
 }
 
-function FrameMedia({ item }) {
+function FrameMedia({ item, onOpen }) {
   if (item.image) {
-    return <img className="frame-media" src={item.image} alt={item.alt} loading="lazy" />
+    return (
+      <img
+        className="frame-media"
+        src={item.image}
+        alt={item.alt}
+        loading="lazy"
+        onClick={() => onOpen(item)}
+      />
+    )
   }
   return <div className="frame-media ph" aria-hidden="true">No image yet</div>
 }
 
-function IllustrationCard({ item }) {
+function IllustrationCard({ item, onOpen }) {
   return (
     <div className="ill-card">
-      <div className="ill-frame"><FrameMedia item={item} /></div>
+      <div className="ill-frame"><FrameMedia item={item} onOpen={onOpen} /></div>
       <div className="ill-title">{item.title}</div>
-      <div className="ill-meta">{item.medium} · {item.year}</div>
+      <div className="ill-meta">{item.medium}{item.year ? ` · ${item.year}` : ''}</div>
     </div>
   )
 }
 
-function EmoteCard({ item }) {
+function EmoteCard({ item, onOpen }) {
   return (
     <div className="emote-card">
-      <div className="emote-frame"><FrameMedia item={item} /></div>
+      <div className="emote-frame"><FrameMedia item={item} onOpen={onOpen} /></div>
       <div className="emote-name">:{item.name}:</div>
     </div>
   )
 }
 
-function ProfilePhotoItem({ item }) {
+function ProfilePhotoItem({ item, onOpen }) {
   return (
     <div className="pfp-item">
-      <div className="pfp-frame"><FrameMedia item={item} /></div>
+      <div className="pfp-frame"><FrameMedia item={item} onOpen={onOpen} /></div>
       <div className="pfp-handle">{item.handle}</div>
-      <div className="pfp-meta">{item.style} · {item.year}</div>
+      <div className="pfp-meta">{item.style}{item.year ? ` · ${item.year}` : ''}</div>
     </div>
   )
 }
 
-function StickerFrame({ item }) {
+function StickerFrame({ item, onOpen }) {
   return (
     <div className="sticker-frame">
-      <div className="sticker-img-wrap"><FrameMedia item={item} /></div>
+      <div className="sticker-img-wrap"><FrameMedia item={item} onOpen={onOpen} /></div>
       <div className="sticker-name">{item.name}</div>
       <div className="sticker-meta">{item.format} · {item.size}</div>
     </div>
   )
 }
 
-function MerchCard({ item }) {
+function MerchCard({ item, onOpen }) {
   return (
     <div className="ill-card">
-      <div className="ill-frame"><FrameMedia item={item} /></div>
+      <div className="ill-frame"><FrameMedia item={item} onOpen={onOpen} /></div>
       <div className="ill-title">{item.title}</div>
-      <div className="ill-meta">{item.product} · {item.year}</div>
+      <div className="ill-meta">{item.product}{item.year ? ` · ${item.year}` : ''}</div>
     </div>
   )
 }
@@ -231,8 +239,28 @@ function CommissionModal({ onClose }) {
   )
 }
 
+function Lightbox({ item, onClose }) {
+  useEffect(() => {
+    document.body.style.overflow = 'hidden'
+    const onKey = (e) => { if (e.key === 'Escape') onClose() }
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = ''
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [onClose])
+
+  return (
+    <div className="lightbox-overlay" onClick={onClose}>
+      <button type="button" className="lightbox-close" onClick={onClose} aria-label="Close">×</button>
+      <img className="lightbox-img" src={item.image} alt={item.alt} onClick={(e) => e.stopPropagation()} />
+    </div>
+  )
+}
+
 export default function Portfolio() {
   const [selected, setSelected] = useState('all')
+  const [lightboxItem, setLightboxItem] = useState(null)
   const [showCommissionModal, setShowCommissionModal] = useState(false)
 
   const byCategory = useMemo(() => {
@@ -305,7 +333,7 @@ export default function Portfolio() {
                   <p className="sec-blurb">{meta.blurb}</p>
                 </div>
                 <div className={gridClass}>
-                  {items.map((item, i) => <Card item={item} key={i} />)}
+                  {items.map((item, i) => <Card item={item} key={i} onOpen={setLightboxItem} />)}
                 </div>
                 {cat === 'emotes' && (
                   <p className="emote-note">Delivered at 112 · 56 · 28 px for Twitch and Discord.</p>
@@ -329,6 +357,7 @@ export default function Portfolio() {
       </div>
 
       {showCommissionModal && <CommissionModal onClose={() => setShowCommissionModal(false)} />}
+      {lightboxItem && <Lightbox item={lightboxItem} onClose={() => setLightboxItem(null)} />}
 
       <Footer />
     </div>
