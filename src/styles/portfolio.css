@@ -55,16 +55,11 @@ button{font-family:inherit;cursor:pointer;}
 
 /* 2. Hero */
 .hero{padding:28px 0 56px;}
-.hero-grid{display:grid;grid-template-columns:1fr;gap:36px;}
 .hero-headline{
   font-family:'Bricolage Grotesque',sans-serif;font-weight:800;
   font-size:clamp(44px,9vw,88px);line-height:1.02;letter-spacing:-0.02em;margin-top:14px;
 }
-.hero-bio{font-size:17px;line-height:1.6;color:var(--text-2);max-width:460px;}
-
-@media(min-width:860px){
-  .hero-grid{grid-template-columns:1.15fr 1fr;align-items:end;}
-}
+.hero-bio{font-size:17px;line-height:1.6;color:var(--text-2);max-width:460px;margin-top:20px;}
 
 /* 3. Tabs */
 .tabs-sticky{position:sticky;top:0;background:var(--bg);z-index:20;padding:24px 0;border-top:1px solid var(--divider);}

@@ -238,7 +238,7 @@ export default function Portfolio() {
     <div data-accent="sky">
       <header className="site-header">
         <div className="wrap header-row">
-          <a href="#top" className="logo">Jeremy<span className="dot">.</span></a>
+          <a href="#top" className="logo">Jayvio<span className="dot">.</span></a>
           <ul className="main-nav">
             <li><a href="#work">Work</a></li>
             <li><a href="#contact">Contact</a></li>
@@ -247,14 +247,10 @@ export default function Portfolio() {
       </header>
 
       <section className="hero" id="top">
-        <div className="wrap hero-grid">
-          <div>
-            <div className="eyebrow">Graphinc Designer · Illustator</div>
-            <h1 className="hero-headline">Design for creators, streamers and brands.</h1>
-          </div>
-          <div>
-            <p className="hero-bio">I'm an NYC-based illustrator and streamer who loves bringing other people's ideas to life. Working digitally lets me explore a different style with every project.</p>
-          </div>
+        <div className="wrap">
+          <div className="eyebrow">Graphinc Designer · Illustator</div>
+          <h1 className="hero-headline">Design for creators, streamers and brands.</h1>
+          <p className="hero-bio">I'm an NYC-based illustrator and streamer who loves bringing other people's ideas to life. Working digitally lets me explore a different style with every project.</p>
         </div>
       </section>
 
