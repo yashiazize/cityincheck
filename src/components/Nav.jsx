@@ -25,6 +25,7 @@ export default function Nav({ active, scrollAware = false }) {
         <li><a href="/" className={active === 'events' ? 'active' : ''}>Events</a></li>
         <li><a href="/#stream">Stream</a></li>
         <li><a href="/about.html" className={active === 'about' ? 'active' : ''}>About</a></li>
+        <li><a href="https://jayvio-shop.fourthwall.com/en-usd" target="_blank" rel="noopener">Merch</a></li>
         <li><a href="https://discord.gg/sYKgpJE23K" target="_blank" rel="noopener" className="nav-cta">Join Discord</a></li>
       </ul>
     </nav>

@@ -28,7 +28,7 @@ export default function Footer() {
         <div className="fcol">
           <h4>More</h4>
           <ul>
-            <li><a href="/merch.html">Merch (Soon)</a></li>
+            <li><a href="https://jayvio-shop.fourthwall.com/en-usd" target="_blank" rel="noopener">Merch</a></li>
             <li><a href="https://discord.gg/sYKgpJE23K" target="_blank" rel="noopener">Join Discord</a></li>
             <li><a href="/portfolio.html">Portfolio</a></li>
           </ul>
