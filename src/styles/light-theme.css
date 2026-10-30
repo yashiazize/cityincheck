@@ -24,6 +24,16 @@ nav.light .nav-links a{color:var(--ink-soft);}
 .nav-links a:hover,.nav-links a.active{color:var(--accent);}
 .nav-cta{background:var(--accent)!important;color:white!important;padding:7px 18px;border-radius:4px;font-size:12px!important;}
 
+.nav-toggle{
+  display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;
+  width:44px;height:44px;background:transparent;border:none;cursor:pointer;padding:0;
+}
+.nav-toggle span{width:22px;height:2px;background:#f5f8fc;border-radius:2px;transition:transform .25s,opacity .25s;}
+nav.light .nav-toggle span{background:var(--navy);}
+.nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-toggle.open span:nth-child(2){opacity:0;}
+.nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
 /* BUTTONS */
 .btn{display:inline-block;text-decoration:none;cursor:pointer;border:none;font-family:'DM Mono',monospace;font-size:13px;letter-spacing:2px;text-transform:uppercase;border-radius:4px;transition:all .22s;}
 .btn-p{background:var(--accent);color:white;padding:13px 28px;}
@@ -61,7 +71,20 @@ footer{background:var(--navy);padding:56px 52px 28px;}
 
 @media(max-width:768px){
   nav{padding:12px 18px;}
-  .nav-links{display:none;}
+  .nav-toggle{display:flex;}
+  .nav-links{
+    display:flex;flex-direction:column;align-items:stretch;gap:0;
+    position:absolute;top:100%;left:0;right:0;
+    background:rgba(13,27,46,0.97);backdrop-filter:blur(16px);
+    border-bottom:1px solid rgba(255,255,255,0.07);
+    max-height:0;overflow:hidden;opacity:0;pointer-events:none;
+    transition:max-height .25s ease,opacity .2s ease;
+  }
+  nav.light .nav-links{background:rgba(244,242,238,0.98);border-bottom:1px solid var(--border);}
+  .nav-links.open{max-height:320px;opacity:1;pointer-events:auto;}
+  .nav-links li{width:100%;}
+  .nav-links a{display:block;padding:16px 18px;font-size:13px;}
+  .nav-cta{display:inline-block;margin:4px 18px 16px;text-align:center;}
   .notify-sec{padding:64px 18px;}
   .ftop{grid-template-columns:1fr 1fr;gap:28px;}
   footer{padding:44px 18px 22px;}
