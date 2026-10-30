@@ -258,7 +258,11 @@ export default function Portfolio() {
       <section className="hero" id="top">
         <div className="wrap">
           <div className="sec-eyebrow portfolio-kicker">Portfolio</div>
-          <div className="eyebrow">Graphic Designer · Illustrator</div>
+          <div className="eyebrow">
+            <span className="eyebrow-name">Jayvio</span>
+            <span className="eyebrow-dot"></span>
+            Graphic Designer · Illustrator
+          </div>
           <h1 className="hero-headline">Design for creators, streamers and brands.</h1>
           <p className="hero-bio">I'm an NYC-based illustrator and streamer who loves bringing other people's ideas to life. Working digitally lets me explore a different style with every project.</p>
         </div>
