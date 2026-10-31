@@ -90,7 +90,7 @@ function encodeForm(data) {
   return Object.keys(data).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`).join('&')
 }
 
-const commissionCategories = ['Illustration', 'Drawing', 'Profile photo', 'Stickers', 'Merch design', 'Something else']
+const commissionCategories = ['Illustration', 'Profile photo', 'Stickers', 'Merch design', 'Something else']
 
 function CommissionForm() {
   const [status, setStatus] = useState('idle') // idle | sending | sent | error

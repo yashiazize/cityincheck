@@ -44,11 +44,11 @@ export const portfolioWork = [
   { category: 'stickers', image: '/assets/portfolio/stickers/CandyLand.png', alt: 'Collage of assorted candy, chocolate, and gummy fish sticker', name: 'Candy Land', format: 'Die-cut / vinyl', size: '3in' },
 
   // Merch Designs
-  { category: 'merch', image: '/assets/portfolio/merch/ChessGridTee.png', alt: 'Tee graphic with a geometric chess-piece grid and "city in check." wordmark', title: 'Chess Grid Tee', product: 'T-shirt' },
-  { category: 'merch', image: '/assets/portfolio/merch/CrownBandana.png', alt: 'Bandana print with a crown framed by a geometric diamond border', title: 'Crown Bandana', product: 'Bandana' },
   { category: 'merch', image: '/assets/portfolio/merch/KingsMonument.png', alt: 'Chess king monument illustration reading "Check" with a city skyline', title: "King's Monument", product: 'Poster print' },
-  { category: 'merch', image: '/assets/portfolio/merch/TheSource_.png', alt: 'NYC street scene illustration centered on a fire hydrant and winding river', title: 'The Source', product: 'Poster print' },
+  { category: 'merch', image: '/assets/portfolio/merch/ChessGridTee.png', alt: 'Tee graphic with a geometric chess-piece grid and "city in check." wordmark', title: 'Chess Grid Tee', product: 'T-shirt' },
   { category: 'merch', image: '/assets/portfolio/merch/TowerGuard_.png', alt: 'Character design of a rook-helmeted knight in a hoodie', title: 'Tower Guard', product: 'T-shirt' },
+  { category: 'merch', image: '/assets/portfolio/merch/CrownBandana.png', alt: 'Bandana print with a crown framed by a geometric diamond border', title: 'Crown Bandana', product: 'Bandana' },
+  { category: 'merch', image: '/assets/portfolio/merch/TheSource_.png', alt: 'NYC street scene illustration centered on a fire hydrant and winding river', title: 'The Source', product: 'Poster print' },
   { category: 'merch', image: '/assets/portfolio/merch/TrailAhead_.png', alt: 'Illustrated forest trail leading toward a snow-capped mountain', title: 'Trail Ahead', product: 'Poster print' },
 ]
 
