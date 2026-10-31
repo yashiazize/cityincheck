@@ -40,7 +40,7 @@ export const portfolioWork = [
   { category: 'stickers', image: '/assets/portfolio/stickers/BodegaTreats.png', alt: '"Bodega Treats" colorful bubble-letter logo sticker', name: 'Bodega Treats', format: 'Die-cut / vinyl', size: '3.5in' },
   { category: 'stickers', image: '/assets/portfolio/stickers/BodegaCat_.png', alt: 'Bodega cat lounging on a milk crate sticker', name: 'Bodega Cat', format: 'Die-cut / vinyl', size: '3in' },
   { category: 'stickers', image: '/assets/portfolio/stickers/BodegaCakes.png', alt: 'Illustrated bodega dessert snacks sticker', name: 'Bodega Cakes', format: 'Die-cut / vinyl', size: '3in' },
-  { category: 'stickers', image: '/assets/portfolio/stickers/CandyLand.png', alt: 'Collage of assorted candy, chocolate, and gummy fish sticker', name: 'Candy Land', format: 'Die-cut / vinyl', size: '3in' },
+  { category: 'stickers', image: '/assets/portfolio/stickers/BodegaSweets.png', alt: 'Collage of assorted candy, chocolate, and gummy fish sticker', name: 'Bodega Sweets', format: 'Die-cut / vinyl', size: '3in' },
   { category: 'stickers', image: '/assets/portfolio/stickers/BodegaBag.png', alt: 'Plastic bodega bag sticker reading "Thank You" with a smiley face', name: 'Bodega Bag', format: 'Die-cut / vinyl', size: '3in' },
 
   // Merch Designs
