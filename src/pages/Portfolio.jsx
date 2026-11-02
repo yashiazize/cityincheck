@@ -9,7 +9,7 @@ const sectionMeta = {
   'profile-photos': { title: 'Profile Photos', blurb: 'Custom avatars for streamers, gamers, and online handles.' },
   illustrations: { title: 'Illustrations', blurb: 'Character pieces and personal work, painted digitally and traditionally.' },
   merch: { title: 'Merch Designs', blurb: 'Apparel and product art made for the shop.' },
-  drawings: { title: 'Drawings', blurb: 'Quick sketches, studies, and personal doodles.' },
+  drawings: { title: 'Drawings', blurb: 'Art projects and studies.' },
   emotes: { title: 'Emotes', blurb: 'Twitch & Discord emotes built to read clearly at tiny sizes.' },
 }
 
